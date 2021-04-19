@@ -1,0 +1,96 @@
+/* CSS HEX */
+/* --black: #000000ff;
+--oxford-blue: #14213dff;
+--orange-web: #fca311ff;
+--platinum: #e5e5e5ff;
+--white: #ffffffff; 
+  color: chartreuse;*/
+body {
+  background-color: #0000aa;
+}
+
+.pic {
+  border: 3px solid #aaaaaa;
+}
+
+#mainNav {
+  font-size: 2rem;
+  font-weight: 100;
+  background-color: #aaaaaa;
+}
+#mainNav .active {
+  background-color: black !important;
+}
+#mainNav .nav-link {
+  color: #ffffff;
+  background: #aaaaaa;
+  line-height: 2rem;
+}
+#mainNav .nav-link:hover {
+  color: #ff00ff;
+  background-color: black;
+}
+#mainNav .navbar-brand {
+  font-size: 2rem !important;
+  color: #ff00ff;
+}
+#mainNav .navbar-brand span {
+  color: #55ff55;
+}
+
+#headingGroup span {
+  color: #55ff55;
+}
+#headingGroup h2 {
+  font-weight: 100;
+  font-size: 3rem;
+  color: #ff00ff;
+  line-height: 1.2rem;
+}
+@media (max-width: 1300px) {
+  #headingGroup h2 {
+    font-size: 2rem;
+  }
+}
+
+.blurb h2 {
+  font-weight: 100;
+  font-size: 2.5rem;
+  color: #ff00ff;
+  line-height: 2.5rem;
+}
+@media (max-width: 1300px) {
+  .blurb h2 {
+    font-size: 2rem;
+  }
+}
+.blurb p {
+  color: #ffffff;
+  font-weight: 100;
+  font-size: 1.125rem;
+  line-height: 2;
+}
+.blurb p .dots {
+  display: inline;
+  color: #55ff55;
+  cursor: pointer;
+  vertical-align: sub;
+  font-style: italic;
+}
+.blurb p .more {
+  display: none;
+}
+.blurb p .less {
+  display: none;
+  cursor: pointer;
+  color: #55ff55;
+  vertical-align: sub;
+  font-style: italic;
+}
+
+.content {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+/*# sourceMappingURL=app.css.map */
