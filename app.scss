@@ -1,9 +1,9 @@
 @import "vars";
 
 // 2px solid #bbbbbb
-body {
-    background-color: $body-color;
-}
+// body {
+//     background-color: $body-color;
+// }
 
 .pic {
     border: 3px solid $nav-color;
@@ -18,14 +18,14 @@ body {
         background-color: black !important;
     }
     .nav-link {
-        color: $txt-color;
-        background: $nav-color;
+        // color: $txt-color;
+        // background: $nav-color;
         line-height: 2rem;
 
-        &:hover {
-            color: $title-color;
-            background-color: black;
-        }
+        // &:hover {
+        //     color: $title-color;
+        //     background-color: black;
+        // }
     }
     .navbar-brand {
         font-size: 2rem !important;
@@ -41,10 +41,10 @@ body {
         color: $accent-color;
     }
     h2 {
-        font-weight: 100;
+        font-weight: bold;
         font-size: 3rem;
         color: $brand-color;
-        line-height: 1.2rem;
+        line-height: 2rem;
 
         @media (max-width: 1300px) {
             font-size: 2rem;
@@ -54,7 +54,7 @@ body {
 
 .blurb {
     h2 {
-        font-weight: 100;
+        font-weight: bold;
         font-size: 2.5rem;
         color: $title-color;
         line-height: 2.5rem;
@@ -64,9 +64,9 @@ body {
         }
     }
     p {
-        color: $txt-color;
-        font-weight: 100;
-        font-size: 1.125rem;
+        // color: $txt-color;
+        // font-weight: 100;
+        // font-size: 1.125rem;
         line-height: 2;
         .dots {
             display: inline;
@@ -91,4 +91,13 @@ body {
 .content {
     margin-top: 100px;
     margin-bottom: 100px;
+}
+.btn {
+    border-radius: 0;
+}
+.form-control {
+    border-radius: 0;
+}
+select.form-control {
+    background: $nav-color !important;
 }

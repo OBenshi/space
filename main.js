@@ -1,5 +1,6 @@
 
-// show more or less 
+
+// show more or less
 const dots = document.querySelectorAll('.dots');
 for (const dot of dots) {
     dot.addEventListener('click', function (event) {
@@ -7,13 +8,13 @@ for (const dot of dots) {
   });  
 }
 
-
 const less = document.querySelectorAll('.less');
 for (const thing of less) {
     thing.addEventListener('click', function (event) {
         showHide(event);
     })
 }
+
 
 // show more or less function 
 

@@ -5,10 +5,6 @@
 --platinum: #e5e5e5ff;
 --white: #ffffffff; 
   color: chartreuse;*/
-body {
-  background-color: #0000aa;
-}
-
 .pic {
   border: 3px solid #aaaaaa;
 }
@@ -22,13 +18,7 @@ body {
   background-color: black !important;
 }
 #mainNav .nav-link {
-  color: #ffffff;
-  background: #aaaaaa;
   line-height: 2rem;
-}
-#mainNav .nav-link:hover {
-  color: #ff00ff;
-  background-color: black;
 }
 #mainNav .navbar-brand {
   font-size: 2rem !important;
@@ -42,10 +32,10 @@ body {
   color: #55ff55;
 }
 #headingGroup h2 {
-  font-weight: 100;
+  font-weight: bold;
   font-size: 3rem;
   color: #ff00ff;
-  line-height: 1.2rem;
+  line-height: 2rem;
 }
 @media (max-width: 1300px) {
   #headingGroup h2 {
@@ -54,7 +44,7 @@ body {
 }
 
 .blurb h2 {
-  font-weight: 100;
+  font-weight: bold;
   font-size: 2.5rem;
   color: #ff00ff;
   line-height: 2.5rem;
@@ -65,9 +55,6 @@ body {
   }
 }
 .blurb p {
-  color: #ffffff;
-  font-weight: 100;
-  font-size: 1.125rem;
   line-height: 2;
 }
 .blurb p .dots {
@@ -91,6 +78,18 @@ body {
 .content {
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+select.form-control {
+  background: #aaaaaa !important;
 }
 
 /*# sourceMappingURL=app.css.map */
