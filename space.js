@@ -11,7 +11,7 @@ let lowestScrl = 0
 
 // adds   launches function 
 
-const addLaunchs = (max=null)=> {
+const addLaunchs = (max=800)=> {
   limit=max
   fetch(`https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`)
     .then(res => {
@@ -20,9 +20,10 @@ const addLaunchs = (max=null)=> {
     })
     .then((data) => {
       displayLaunch(data.results)
-      console.log(data.results)
+      // console.log('data',data.results)
       createOptions(data.results)
       addEvents(data.results)
+      document.getElementById("loading").style.display = 'none';
     }).catch(e => {
         console.log('we do not have data', e)
         document.body.append('fuck my life')
@@ -35,17 +36,17 @@ if (document.title === "UPCOMING LAUNCHES") {
 
 // load more on scroll function
 
-function onScroll(event) {
-  const current = document.documentElement.scrollTop;
-  const maxHeight = document.body.scrollHeight;
-  if (current > lowestScrl && current>maxHeight*0.5) {
-    // offset = offset + 3;
-    addLaunchs();
-    lowestScrl = current
-  } 
-}
-window.addEventListener('scroll', event => onScroll(event));
-//       create Select Options for agency;
+// function onScroll(event) {
+//   const current = document.documentElement.scrollTop;
+//   const maxHeight = document.body.scrollHeight;
+//   if (current > lowestScrl && current>maxHeight*0.5) {
+//     offset = offset + 3;
+//     addLaunchs();
+//     lowestScrl = current
+//   } 
+// }
+// window.addEventListener('scroll', event => onScroll(event));
+//       create Select Options for agency and location ;
 
 const createOptions = (launches) => {
   // let agencies = launches.map((launch) => {return launch.launch_service_provider.name;});
@@ -71,27 +72,27 @@ const createOptions = (launches) => {
   })
 };
 
+
+// adding listeners for dropdowns 
 const addEvents = (results) => {
 
-  let agencyDrop = document.querySelectorAll("#agencySelect")
+  // let agencyDrop = document.querySelectorAll("#agencySelect")
+  let agencyDrop = document.getElementById('agencySelect')
   let locationDrop = document.getElementById('locationSelect')
-  console.log(agencyDrop)
-  agencyDrop.forEach((listi) => {
-    listi.addEventListener("change", () => {
-      filterData(results)
-    });
-  });
+  // console.log(agencyDrop)
+  // agencyDrop.forEach((listi) => {
+  //   listi.addEventListener("change", () => {
+  //     filterData(results)
+  //     console.log('!!!!222!!!!',results)
+  //   });
+  // });
+  agencyDrop.addEventListener("change",()=>{filterData(results)})
   locationDrop.addEventListener('change', () => {
     filterData(results)
   })
 
 };
 
-
-// function to show upcoming launches at start 
-// const showUpcoming =()=> addLaunchs();
-// showUpcoming()
- 
 // countdown timer 
 const timeCounter = (T,launchName) => {
   // Set the date we're counting down to
@@ -114,6 +115,7 @@ var x = setInterval(function() {
     if (document.getElementById(`${launchName}-counter`)) {
         document.getElementById(`${launchName}-counter`).innerText = `T- ${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
+    // else { document.getElementById(`${launchName}-counter`).innerText = `T- !!d !!h !!m !!s`; }
   
     
 
@@ -129,9 +131,10 @@ var x = setInterval(function() {
 // creating launch function
 
 const displayLaunch = (launches) => {
-  const launchesDiv = document.getElementById('launchesDiv');
+  const launchesDiv = document.getElementById("launchesDiv");
   launchesDiv.innerHTML=""
   launches.forEach((launch) => {
+    // console.log(launch)
        // creates launch div
     aLaunch = document.createElement('div');
     aLaunch.setAttribute("id", `${launch.name}`)
@@ -159,12 +162,17 @@ const displayLaunch = (launches) => {
     infoDiv = document.createElement('div');
     infoDiv.classList.add(...divClasses);
     infoDiv.classList.add('blurb');
+    // infoDiv.classList.add('jumbotron')
     aLaunch.append(infoDiv);
             
     // adds title  to info 
     launchName = document.createElement('h2');
     launchName.innerText = launch.name;
     infoDiv.append(launchName);
+
+    launchLocation = document.createElement('p');
+    launchLocation.innerText = `from: ${launch.pad.location.name}`
+    infoDiv.append(launchLocation);
 
     // adds time to info 
     launchTime = document.createElement('p');
@@ -202,6 +210,7 @@ const displayLaunch = (launches) => {
  }
     
 
+//  removing doubles function 
 
 const removeDuble = (toClean) => {
    let cleaned = [];
@@ -216,24 +225,90 @@ const removeDuble = (toClean) => {
 
 
 
-const filterData = (launches) => {
+// const filterData = (launches) => {
 
+//   let selectedAgency = document.getElementById("agencySelect").value;
+//   // console.log(selectedAgency);
+//   let selectedLocation = document.getElementById('locationSelect').value;
+//   let filteredData = [];
+//   if (!selectedAgency || selectedAgency == "all") {
+//     // launches.forEach((launch) => { filteredData.push(launch);})
+//     displayLaunch(launches);
+//   } else {
+//     launches.forEach((launch) => {
+//       if (launch.launch_service_provider.name == selectedAgency) {
+//         filteredData.push(launch);
+//         console.log(`launch.launch_service_provider.name is ${launch.launch_service_provider.name} selectedagency is ${selectedAgency}`)
+//       }
+//     })
+//   }
+//   console.log('filtered data ',filteredData)
+//   displayLaunch(filteredData)
+// }
+
+
+// const filterData = (breeds) => {
+//   let checkboxes = Array.from(
+//     document.querySelectorAll("input[type=checkbox]:checked")
+//   ).map((checkbox) => {
+//     return checkbox.value;
+//   });
+//   let selectElm = document.getElementById("country-select").value;
+//   console.log(selectElm);
+//   console.log(checkboxes);
+
+//   if (selectElm !== "all" || checkboxes.length !== 0) {
+//     console.log("here");
+//   }
+//   let filteredData = [];
+//   if (checkboxes.length === 0) {
+//     displayData(breeds);
+//   } else {
+//     breeds.forEach((breed) => {
+//       if (checkboxes.includes(breed.origin)) {
+//         filteredData.push(breed);
+//       }
+//     });
+//     displayData(filteredData);
+//   }
+// };
+
+
+const filterData = (launches) => {
   let selectedAgency = document.getElementById("agencySelect").value;
-  console.log(selectedAgency);
   let selectedLocation = document.getElementById('locationSelect').value;
-    let filteredData = [];
-  if (selectedAgency == 'all' && selectedLocation=='all') {
-    launches.forEach((launch) => { filteredData.push(launch);})
-    // displayLaunch(launches);
-  } else {
-    launches.forEach((launch) => {
-      if (launch.launch_service_provider.name == selectedAgency) {
+  let filteredData = [];
+
+  
+  launches.forEach((launch) => {
+    if (selectedAgency == "all" && selectedLocation == "all") {
+  filteredData.push(launch)
+    } else if (selectedAgency == launch.launch_service_provider.name) {
+      if (selectedLocation == "all") {
         filteredData.push(launch);
+      } else if (selectedLocation == launch.pad.location.name) {
+        filteredData.push(launch)
       }
-    })
-  }
-  console.log(filteredData)
+    } else if (selectedLocation == launch.pad.location.name) {
+      if (selectedAgency=="all") {
+        filteredData.push(launch);
+      } else if (selectedAgency == launch.launch_service_provider.name) {
+        filteredData.push(launch)
+      }
+      
+    }
+    
+  })
+  if (filteredData.length>0) {
+    // console.log(filteredData)
   displayLaunch(filteredData)
+  } else { noResults()}
+ 
 }
 
-
+const noResults = () => {
+  launchesDiv.innerText=""
+  nonFound = document.createElement('h2');
+  nonFound.innerHTML = "NO LAUNCHES MATCH YOUR SEARCH..."
+  launchesDiv.append(nonFound)
+}
