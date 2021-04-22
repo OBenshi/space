@@ -11,7 +11,7 @@ let lowestScrl = 0
 
 // adds   launches function 
 
-const addLaunchs = (max=10,isAdd=false)=> {
+const addLaunchs = (max=10)=> {
   limit=max
   fetch(`https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`)
     .then(res => {
@@ -20,7 +20,7 @@ const addLaunchs = (max=10,isAdd=false)=> {
     })
     .then((data) => {
       // displayLaunch(data.results)
-      filterData(data.results,isAdd)
+      filterData(data.results)
       // console.log('data',data.results)
       createOptions(data.results)
       addEvents(data.results)
@@ -37,17 +37,17 @@ if (document.title === "UPCOMING LAUNCHES") {
 
 // load more on scroll function
 
-function onScroll(event) {
-  const current = document.documentElement.scrollTop;
-  const maxHeight = document.body.scrollHeight;
-  if (current > lowestScrl && current>maxHeight*0.5) {
-    offset = offset + 10;
-    addLaunchs(10,true);
-    lowestScrl = current
-  } 
-}
-window.addEventListener('scroll', event => onScroll(event));
-      // create Select Options for agency and location ;
+// function onScroll(event) {
+//   const current = document.documentElement.scrollTop;
+//   const maxHeight = document.body.scrollHeight;
+//   if (current > lowestScrl && current>maxHeight*0.5) {
+//     offset = offset + 10;
+//     addLaunchs();
+//     lowestScrl = current
+//   } 
+// }
+// window.addEventListener('scroll', event => onScroll(event));
+//       create Select Options for agency and location ;
 
 const createOptions = (launches) => {
   // let agencies = launches.map((launch) => {return launch.launch_service_provider.name;});
@@ -131,12 +131,9 @@ var x = setInterval(function() {
 
 // creating launch function
 
-const displayLaunch = (launches,isAdd) => {
+const displayLaunch = (launches) => {
   const launchesDiv = document.getElementById("launchesDiv");
-  if (!isAdd) {
-    launchesDiv.innerHTML = ""
-  }
-  
+  launchesDiv.innerHTML=""
   launches.forEach((launch) => {
     // console.log(launch)
        // creates launch div
@@ -278,7 +275,7 @@ const removeDuble = (toClean) => {
 // };
 
 
-const filterData = (launches,isAdd) => {
+const filterData = (launches) => {
   let selectedAgency = document.getElementById("agencySelect").value;
   let selectedLocation = document.getElementById('locationSelect').value;
   let filteredData = [];
@@ -305,7 +302,7 @@ const filterData = (launches,isAdd) => {
   })
   if (filteredData.length>0) {
     // console.log(filteredData)
-  displayLaunch(filteredData,isAdd)
+  displayLaunch(filteredData)
   } else { noResults()}
  
 }
