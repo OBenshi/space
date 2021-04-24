@@ -12,13 +12,13 @@ h5 {
 }
 
 .pic {
-  border: 3px solid #aaaaaa;
+  border: 3px solid #bbbbbb;
 }
 
 #mainNav {
   font-size: 2rem;
   font-weight: 100;
-  background-color: #aaaaaa;
+  background-color: #bbbbbb;
 }
 #mainNav .active {
   background-color: black !important;
@@ -95,7 +95,45 @@ h5 {
 }
 
 select.form-control {
-  background: #aaaaaa !important;
+  background: #bbbbbb !important;
+}
+
+.custom-control-label {
+  line-height: 1.1rem;
+}
+
+*.show {
+  display: flex !important;
+}
+
+.aLaunch {
+  background-color: #000084;
+  border-style: dashed;
+  border-color: white;
+  border-width: 0.2rem;
+}
+.aLaunch .tab-content {
+  border-width: 0.2rem;
+  border-top: none;
+  border-color: white;
+}
+.aLaunch .nav-tabs {
+  border-color: white;
+  border-style: dashed;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-width: 0.2rem;
+}
+.aLaunch .nav-link {
+  background-color: #bbbbbb;
+  color: yellow;
+  border-color: white;
+  border-style: dashed;
+  border-top-width: 0.2rem;
+}
+.aLaunch p {
+  color: white;
 }
 
 /*# sourceMappingURL=app.css.map */

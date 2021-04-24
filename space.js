@@ -6,7 +6,7 @@ let lowestScrl = 0;
 
 // adds   launches function
 
-const addLaunchs = (max = 10) => {
+const addLaunchs = (max = 1000) => {
   limit = max;
   fetch(
     `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
@@ -17,14 +17,16 @@ const addLaunchs = (max = 10) => {
     .catch((e) => {})
     .then((data) => {
       // displayLaunch(data.results)
-      filterData(data.results);
+
       // console.log('data',data.results)
       createOptions(data.results);
       addEvents(data.results);
       document.getElementById("loading").style.display = "none";
+      filterData(data.results);
     })
     .catch((e) => {
       console.log("we do not have data", e);
+
       document.body.append("fuck my life");
     });
 };
@@ -62,6 +64,7 @@ const createOptions = (launches) => {
   );
 
   let agencySelector = document.getElementById("agencySelect");
+  let temporary = "<option value='all'>All</option>";
   agencies.forEach((agency) => {
     let option = document.createElement("option");
     option.innerHTML = agency;
@@ -154,7 +157,14 @@ const displayLaunch = (launches) => {
     // creates launch div
     aLaunch = document.createElement("div");
     aLaunch.setAttribute("id", `${launch.name}`);
-    const sectionClasses = ["row", "align-items-center", "my-4", "mx-2"];
+    const sectionClasses = [
+      "row",
+      // "align-items-center",
+      "my-4",
+      "mx-2",
+      "jumbotron",
+      "d-flex",
+    ];
     aLaunch.classList.add(...sectionClasses);
 
     // create pic div and adds to launch div
@@ -220,6 +230,14 @@ const displayLaunch = (launches) => {
     launchProvider = document.createElement("p");
     launchProvider.innerText = `Provider - ${launch.launch_service_provider.name}`;
     infoDiv.append(launchProvider);
+
+    missionTyp = document.createElement("p");
+    if (launch.mission != 0) {
+      missionTyp.innerText = `Mission Type - ${launch.mission.type}`;
+    } else {
+      missionTyp.innerText = `Mission Type - Other`;
+    }
+    infoDiv.append(missionTyp);
 
     // add launch to launch section
 
@@ -290,30 +308,73 @@ const filterData = (launches) => {
   let selectedAgency = document.getElementById("agencySelect").value;
   let selectedLocation = document.getElementById("locationSelect").value;
   let filteredData = [];
-
-  launches.forEach((launch) => {
-    if (selectedAgency == "all" && selectedLocation == "all") {
-      filteredData.push(launch);
-    } else if (selectedAgency == launch.launch_service_provider.name) {
-      if (selectedLocation == "all") {
-        filteredData.push(launch);
-      } else if (selectedLocation == launch.pad.location.name) {
-        filteredData.push(launch);
-      }
-    } else if (selectedLocation == launch.pad.location.name) {
-      if (selectedAgency == "all") {
-        filteredData.push(launch);
-      } else if (selectedAgency == launch.launch_service_provider.name) {
-        filteredData.push(launch);
-      }
-    }
+  let checkboxes = Array.from(
+    document.querySelectorAll("input[type=checkbox]:checked")
+  ).map((checkbox) => {
+    return checkbox.value;
   });
-  if (filteredData.length > 0) {
-    // console.log(filteredData)
-    displayLaunch(filteredData);
-  } else {
-    noResults();
-  }
+  console.log(checkboxes);
+
+  // launches.forEach((launch) => {
+  //   if (selectedAgency == "all" && selectedLocation == "all") {
+  //     filteredData.push(launch);
+  //   } else if (selectedAgency == launch.launch_service_provider.name) {
+  //     if (selectedLocation == "all") {
+  //       filteredData.push(launch);
+  //     } else if (selectedLocation == launch.pad.location.name) {
+  //       filteredData.push(launch);
+  //     }
+  //   } else if (selectedLocation == launch.pad.location.name) {
+  //     if (selectedAgency == "all") {
+  //       filteredData.push(launch);
+  //     } else if (selectedAgency == launch.launch_service_provider.name) {
+  //       filteredData.push(launch);
+  //     }
+  //   }
+  // });
+  // if (filteredData.length > 0) {
+  //   // console.log(filteredData)
+  //   displayLaunch(filteredData);
+  // } else {
+  //   noResults();
+  // }
+
+  let filtered = launches.filter((launch) => {
+    if (launch.mission == null) {
+      launch.mission = { type: "Other" };
+    }
+    return (
+      (checkboxes.length === 0 &&
+        selectedAgency === "all" &&
+        selectedLocation === "all") ||
+      (checkboxes.length !== 0 &&
+        checkboxes.includes(launch.mission.type) &&
+        selectedAgency === "all" &&
+        selectedLocation === "all") ||
+      (selectedAgency !== "all" &&
+        selectedLocation === "all" &&
+        checkboxes.length === 0 &&
+        selectedAgency === launch.launch_service_provider.name) ||
+      (checkboxes.length !== 0 &&
+        checkboxes.includes(launch.mission.type) &&
+        selectedLocation === "all" &&
+        selectedAgency === launch.launch_service_provider.name) ||
+      (selectedAgency === "all" &&
+        selectedLocation === launch.pad.location.name &&
+        checkboxes.length === 0) ||
+      (selectedAgency == "all" &&
+        checkboxes.length !== 0 &&
+        selectedLocation == launch.pad.location.name &&
+        checkboxes.includes(launch.mission.type)) ||
+      (selectedLocation === launch.pad.location.name &&
+        selectedAgency === launch.launch_service_provider.name &&
+        checkboxes.length === 0) ||
+      (selectedLocation === launch.pad.location.name &&
+        selectedAgency === launch.launch_service_provider.name &&
+        checkboxes.includes(launch.mission.type))
+    );
+  });
+  displayLaunch(filtered);
 };
 
 const noResults = () => {

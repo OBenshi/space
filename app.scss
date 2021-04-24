@@ -105,3 +105,46 @@ h5 {
 select.form-control {
     background: $nav-color !important;
 }
+
+.custom-control-label {
+    line-height: 1.1rem;
+}
+
+*.show {
+    display: flex !important;
+}
+
+.aLaunch {
+    background-color: $body-color;
+    border-style: dashed;
+    border-color: white;
+    border-width: 0.2rem;
+
+    .tab-content {
+        border-width: 0.2rem;
+        // border-style: dashed;
+        border-top: none;
+        border-color: white;
+    }
+
+    .nav-tabs {
+        border-color: white;
+        border-style: dashed;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-width: 0.2rem;
+        // background-color: $nav-color;
+    }
+
+    .nav-link {
+        background-color: $nav-color;
+        color: yellow;
+        border-color: white;
+        border-style: dashed;
+        border-top-width: 0.2rem;
+    }
+    p {
+        color: white;
+    }
+}
