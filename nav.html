@@ -16,11 +16,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app.css">
 
-    <title>UPCOMING LAUNCHES</title>
+    <title>UPCOMING fklgjLAUNCHES</title>
 </head>
 
 <body>
-    <nav id="mainNav" class="navbar  navbar-dark navbar-expand-md py-0">
+    <nav id="mainNav" class="navbar bs-component navbar-dark navbar-expand-md py-0">
 
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,6 +48,16 @@
             <option value="russia">2</option>
             <option value="spacex">3</option>
         </select>
+    </div>
+    <div class="bs-component">
+        <div class="form-group">
+            <label for="exampleSelect1">Example select</label>
+            <select class="form-control" id="exampleSelect1">
+                <option value="nasa">1</option>
+                <option value="russia">2</option>
+                <option value="spacex">3</option>
+            </select>
+        </div>
     </div>
     <section id="launches" class="container-fluid px-0 "></section>
 
@@ -187,15 +197,75 @@
 
 
     </div>
-
+    <br><br><br><br><br><br><br>
+    <section id="launchesDiv" class="container-fluid px-0 ">
+        <div id="Falcon 9 Block 5 | SpX USCV-2 (NASA Crew Flight 2)" class="bs-component align-items-center my-4 mx-2">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                        aria-controls="home" aria-selected="true">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                        aria-controls="profile" aria-selected="false">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                        aria-controls="contact" aria-selected="false">Contact</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active d-flex" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="blurb col-12 col-md-6">
+                        <h2>Falcon 9 Block 5 | SpX USCV-2 (NASA Crew Flight 2)</h2>
+                        <p>from: Kennedy Space Center, FL, USA</p>
+                        <p>12:11:00 GMT+0200 (Mitteleuropäische Sommerzeit)</p>
+                        <p id="Falcon 9 Block 5 | SpX USCV-2 (NASA Crew Flight 2)-counter">LAUNCHED!</p>
+                        <p>SpaceX Crew-2 will be the second crewed operational flight of a Crew Dragon spacecraft,
+                            and
+                            the
+                            third
+                            overall crewed orbital flight. It will use the same Falcon 9 first stage as the Crew-1
+                            mission
+                            and
+                            the
+                            same Crew Dragon capsule as the Demo-2 mission (Endeavour).</p>
+                        <p>Provider - SpaceX</p>
+                    </div>
+                    <div class="col-12 col-md-6 align-self-center"><img class="img-fluid pic"
+                            src="https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launch_images/falcon2520925_image_20210310075411.jpeg">
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            </div>
+        </div>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Home</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">Profile</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                    aria-controls="nav-contact" aria-selected="false">Contact</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
+    </section>
+    <br><br><br><br><br><br><br>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script> -->
