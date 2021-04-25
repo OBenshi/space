@@ -92,6 +92,10 @@ select.form-control {
   background: #bbbbbb !important;
 }
 
+.custom-checkbox .custom-control-label::after {
+  content: "[ ]";
+}
+
 .custom-control-label {
   line-height: 1.1rem;
 }
@@ -184,6 +188,41 @@ select.form-control {
   font-size: 3rem;
   line-height: 3rem;
   font-weight: 1100;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none !important;
+  background-color: #000084;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-image: none !important;
+  background-color: #000084;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0rem;
+  border: none;
+  background-color: #000084;
+}
+
+.custom-checkbox .custom-control-input:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: #000084;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: none !important;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-checkbox .custom-control-input::after {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: #000084;
 }
 
 /*# sourceMappingURL=app.css.map */

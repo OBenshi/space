@@ -5,210 +5,247 @@
 //     background-color: $body-color;
 // }
 h5 {
-    color: black;
-    line-height: 5rem;
-    font-size: 3rem;
+  color: black;
+  line-height: 5rem;
+  font-size: 3rem;
 }
 .pic {
-    border: 3px solid $nav-color;
+  border: 3px solid $nav-color;
 }
 
 #mainNav {
-    font-size: 2rem;
-    // font-weight: 700;
-    // background-color: $nav-color;
+  font-size: 2rem;
+  // font-weight: 700;
+  // background-color: $nav-color;
 
-    // .active {
-    // background-color: black !important;
+  // .active {
+  // background-color: black !important;
+  // }
+  .nav-link {
+    // color: $txt-color;
+    // background: $nav-color;
+    line-height: 2rem;
+
+    // &:hover {
+    //     color: $title-color;
+    //     background-color: black;
     // }
-    .nav-link {
-        // color: $txt-color;
-        // background: $nav-color;
-        line-height: 2rem;
-
-        // &:hover {
-        //     color: $title-color;
-        //     background-color: black;
-        // }
+  }
+  .navbar-brand {
+    font-size: 2rem !important;
+    color: $brand-color;
+    span {
+      color: $accent-color;
     }
-    .navbar-brand {
-        font-size: 2rem !important;
-        color: $brand-color;
-        span {
-            color: $accent-color;
-        }
-    }
+  }
 }
 
 #headingGroup {
-    span {
-        color: $accent-color;
-    }
-    h2 {
-        // font-weight: 200;
-        font-size: 3rem;
-        color: $brand-color;
-        line-height: 2rem;
+  span {
+    color: $accent-color;
+  }
+  h2 {
+    // font-weight: 200;
+    font-size: 3rem;
+    color: $brand-color;
+    line-height: 2rem;
 
-        @media (max-width: 1300px) {
-            font-size: 2rem;
-        }
+    @media (max-width: 1300px) {
+      font-size: 2rem;
     }
+  }
 }
 
 .blurb {
-    h2 {
-        font-weight: bold;
-        font-size: 2.5rem;
-        color: $title-color;
-        line-height: 2.5rem;
+  h2 {
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: $title-color;
+    line-height: 2.5rem;
 
-        @media (max-width: 1300px) {
-            font-size: 2rem;
-        }
+    @media (max-width: 1300px) {
+      font-size: 2rem;
     }
-    p {
-        // color: $txt-color;
-        // font-weight: 100;
-        // font-size: 1.125rem;
-        line-height: 2;
-        .dots {
-            display: inline;
-            color: $accent-color;
-            cursor: pointer;
-            vertical-align: sub;
-            font-style: italic;
-        }
-        .more {
-            display: none;
-        }
-        .less {
-            display: none;
-            cursor: pointer;
-            color: $accent-color;
-            vertical-align: sub;
-            font-style: italic;
-        }
+  }
+  p {
+    // color: $txt-color;
+    // font-weight: 100;
+    // font-size: 1.125rem;
+    line-height: 2;
+    .dots {
+      display: inline;
+      color: $accent-color;
+      cursor: pointer;
+      vertical-align: sub;
+      font-style: italic;
     }
+    .more {
+      display: none;
+    }
+    .less {
+      display: none;
+      cursor: pointer;
+      color: $accent-color;
+      vertical-align: sub;
+      font-style: italic;
+    }
+  }
 }
 
 .content {
-    margin-top: 100px;
-    margin-bottom: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 .btn {
-    border-radius: 0;
+  border-radius: 0;
 }
 .form-control {
-    border-radius: 0;
+  border-radius: 0;
 }
 select.form-control {
-    background: $nav-color !important;
+  background: $nav-color !important;
 }
 .custom-checkbox .custom-control-label::after {
-    content: "[ ]";
+  content: "[ ]";
 }
 .custom-control-label {
-    line-height: 1.1rem;
+  line-height: 1.1rem;
 }
 
 *.show {
-    display: flex !important;
+  display: flex !important;
 }
 
 .aLaunch {
-    background-color: $nav-color;
-    border-style: dotted;
-    border-color: $card-border-color;
+  background-color: $nav-color;
+  border-style: dotted;
+  border-color: $card-border-color;
+  border-width: 0.2rem;
+
+  .tab-content {
     border-width: 0.2rem;
+    // border-style: dashed;
+    border-top: none;
+    border-color: $card-border-color;
+  }
 
-    .tab-content {
-        border-width: 0.2rem;
-        // border-style: dashed;
-        border-top: none;
-        border-color: $card-border-color;
+  .nav-pills {
+    border-color: hotpink;
+    border-style: dotted;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    border-width: 7rem;
+    // margin-bottom: none;
+    // padding-bottom: none;
+    // background-color: $nav-color;
+  }
+
+  p {
+    color: white;
+  }
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    color: $nav-color;
+    border-bottom-color: $nav-color;
+    border-bottom-width: 0.2rem;
+    border-bottom-style: dotted;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    background-color: black;
+    padding-left: 1.5rem;
+
+    .nav-link {
+      // color: $dark-nav;
+      border-color: $card-border-color;
+      border-style: none;
+      border-top-width: none;
+      // margin-bottom: none !important;
+      // padding-bottom: none !important;
+      border-bottom: none;
+      padding-top: 0.2rem;
+      // margin-left: 1rem;
     }
-
-    .nav-pills {
-        border-color: hotpink;
-        border-style: dotted;
-        border-top: none;
-        border-right: none;
-        border-left: none;
-        border-bottom: none;
-        border-width: 7rem;
-        // margin-bottom: none;
-        // padding-bottom: none;
-        // background-color: $nav-color;
-    }
-
+  }
+  .card-body {
     p {
-        color: white;
+      color: $txt-on-gray;
     }
-    .card-header {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: center;
-        justify-content: space-between;
-        align-items: center;
-        color: $nav-color;
-        border-bottom-color: $nav-color;
-        border-bottom-width: 0.2rem;
-        border-bottom-style: dotted;
-        padding-top: 0.5rem;
-        padding-bottom: 1rem;
-        background-color: black;
-        padding-left: 1.5rem;
-
-        .nav-link {
-            // color: $dark-nav;
-            border-color: $card-border-color;
-            border-style: none;
-            border-top-width: none;
-            // margin-bottom: none !important;
-            // padding-bottom: none !important;
-            border-bottom: none;
-            padding-top: 0.2rem;
-            // margin-left: 1rem;
-        }
-    }
-    .card-body {
-        p {
-            color: $txt-on-gray;
-        }
-    }
+  }
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-    color: $dark-nav;
-    background-color: black;
-    // padding-left: 0.75rem;
-    // padding-right: 0.75rem;
+  color: $dark-nav;
+  background-color: black;
+  // padding-left: 0.75rem;
+  // padding-right: 0.75rem;
 }
 #po1 {
-    font-size: 3rem;
-    line-height: 3rem;
-    font-weight: 100;
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 100;
 }
 
 #po2 {
-    font-size: 3rem;
-    line-height: 3rem;
-    font-weight: 600;
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 600;
 }
 #po3 {
-    font-size: 3rem;
-    line-height: 3rem;
-    font-weight: 900;
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 900;
 }
 #po4 {
-    font-size: 3rem;
-    line-height: 3rem;
-    font-weight: 1000;
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 1000;
 }
 #po5 {
-    font-size: 3rem;
-    line-height: 3rem;
-    font-weight: 1100;
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 1100;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none !important;
+  background-color: $body-color;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-image: none !important;
+  background-color: $body-color;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0rem;
+  border: none;
+  background-color: $body-color;
+}
+.custom-checkbox .custom-control-input:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: $body-color;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: none !important;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+// .custom-control-label::before, .custom-file-label, .custom-select {
+// 	transition:
+// }
+.custom-checkbox .custom-control-input::after {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: $body-color;
 }

@@ -155,27 +155,32 @@ const displayLaunch = (launches) => {
   launches.forEach((launch) => {
     // console.log(launch)
     // creates launch div
-    aLaunch = document.createElement("div");
-    aLaunch.setAttribute("id", `${launch.name}`);
+    aLaunchSum = document.createElement("div");
+    // aLaunchSum.innerHTML = `class="tab-pane fade show active flex-wrap" id="${launch.name}-sum" role="tabpanel"
+    // aria-labelledby="${launch.name}-sum-tab"`;
+    aLaunchSum.setAttribute("id", `${launch.name}-sum`);
+    aLaunchSum.setAttribute("role", "tabpanel");
+    aLaunchSum.setAttribute("aria-labelledby", `${launch.name}-sum-tab`);
+    //   role: "tabpanel",
+    //   "aria-labelledby": `${launch.name}-sum-tab`,
+    // });
     const sectionClasses = [
-      "row",
+      "tab-pane",
       // "align-items-center",
-      "my-4",
-      "mx-2",
-      "jumbotron",
-      "d-flex",
+      "fade",
+      "flex-wrap",
     ];
-    aLaunch.classList.add(...sectionClasses);
+    aLaunchSum.classList.add(...sectionClasses);
 
     // create pic div and adds to launch div
     picDiv = document.createElement("div");
     const divClasses = ["col-12", "col-md-6"];
     picDiv.classList.add(...divClasses);
-    aLaunch.append(picDiv);
+    aLaunchSum.append(picDiv);
 
     // create pic and add to pic div
     launchPic = document.createElement("img");
-    const imgClasses = ["img-fluid", "pic"];
+    const imgClasses = ["img-fluid", "pic", "d-flex"];
     launchPic.classList.add(...imgClasses);
     if (launch.image) {
       launchPic.src = launch.image;
@@ -191,7 +196,7 @@ const displayLaunch = (launches) => {
     infoDiv.classList.add(...divClasses);
     infoDiv.classList.add("blurb");
     // infoDiv.classList.add('jumbotron')
-    aLaunch.append(infoDiv);
+    aLaunchSum.append(infoDiv);
 
     // adds title  to info
     launchName = document.createElement("h2");
@@ -239,9 +244,13 @@ const displayLaunch = (launches) => {
     }
     infoDiv.append(missionTyp);
 
+    launchCardContent = document.createElement("div");
+    launchCardContent.classList.add("tab-content");
+    launchCardContent.setAttribute("id", `${launch.name}-tab-Content`);
+    launchCardContent.append(aLaunchSum);
     // add launch to launch section
 
-    launchesDiv.append(aLaunch);
+    launchesDiv.append(launchCardContent);
   });
 };
 
@@ -374,7 +383,13 @@ const filterData = (launches) => {
         checkboxes.includes(launch.mission.type))
     );
   });
-  displayLaunch(filtered);
+  if (filtered.length == 0) {
+    noResults();
+  } else {
+    displayLaunch(filtered);
+  }
+
+  console.log(filtered);
 };
 
 const noResults = () => {
