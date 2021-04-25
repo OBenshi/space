@@ -17,18 +17,13 @@ h5 {
 
 #mainNav {
   font-size: 2rem;
-  font-weight: 100;
-  background-color: #bbbbbb;
-}
-#mainNav .active {
-  background-color: black !important;
 }
 #mainNav .nav-link {
   line-height: 2rem;
 }
 #mainNav .navbar-brand {
   font-size: 2rem !important;
-  color: #ff00ff;
+  color: #aa0000;
 }
 #mainNav .navbar-brand span {
   color: #55ff55;
@@ -38,9 +33,8 @@ h5 {
   color: #55ff55;
 }
 #headingGroup h2 {
-  font-weight: bold;
   font-size: 3rem;
-  color: #ff00ff;
+  color: #aa0000;
   line-height: 2rem;
 }
 @media (max-width: 1300px) {
@@ -52,7 +46,7 @@ h5 {
 .blurb h2 {
   font-weight: bold;
   font-size: 2.5rem;
-  color: #ff00ff;
+  color: black;
   line-height: 2.5rem;
 }
 @media (max-width: 1300px) {
@@ -107,33 +101,89 @@ select.form-control {
 }
 
 .aLaunch {
-  background-color: #000084;
-  border-style: dashed;
-  border-color: white;
+  background-color: #bbbbbb;
+  border-style: dotted;
+  border-color: #555555;
   border-width: 0.2rem;
 }
 .aLaunch .tab-content {
   border-width: 0.2rem;
   border-top: none;
-  border-color: white;
+  border-color: #555555;
 }
-.aLaunch .nav-tabs {
-  border-color: white;
-  border-style: dashed;
+.aLaunch .nav-pills {
+  border-color: hotpink;
+  border-style: dotted;
   border-top: none;
   border-right: none;
   border-left: none;
-  border-width: 0.2rem;
-}
-.aLaunch .nav-link {
-  background-color: #bbbbbb;
-  color: yellow;
-  border-color: white;
-  border-style: dashed;
-  border-top-width: 0.2rem;
+  border-bottom: none;
+  border-width: 7rem;
 }
 .aLaunch p {
   color: white;
+}
+.aLaunch .card-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  color: #bbbbbb;
+  border-bottom-color: #bbbbbb;
+  border-bottom-width: 0.2rem;
+  border-bottom-style: dotted;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  background-color: black;
+  padding-left: 1.5rem;
+}
+.aLaunch .card-header .nav-link {
+  border-color: #555555;
+  border-style: none;
+  border-top-width: none;
+  border-bottom: none;
+  padding-top: 0.2rem;
+}
+.aLaunch .card-body p {
+  color: black;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #555555;
+  background-color: black;
+}
+
+#po1 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 100;
+}
+
+#po2 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 600;
+}
+
+#po3 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 900;
+}
+
+#po4 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 1000;
+}
+
+#po5 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 1100;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -15,12 +15,12 @@ h5 {
 
 #mainNav {
     font-size: 2rem;
-    font-weight: 100;
-    background-color: $nav-color;
+    // font-weight: 700;
+    // background-color: $nav-color;
 
-    .active {
-        background-color: black !important;
-    }
+    // .active {
+    // background-color: black !important;
+    // }
     .nav-link {
         // color: $txt-color;
         // background: $nav-color;
@@ -45,7 +45,7 @@ h5 {
         color: $accent-color;
     }
     h2 {
-        font-weight: bold;
+        // font-weight: 200;
         font-size: 3rem;
         color: $brand-color;
         line-height: 2rem;
@@ -115,36 +115,98 @@ select.form-control {
 }
 
 .aLaunch {
-    background-color: $body-color;
-    border-style: dashed;
-    border-color: white;
+    background-color: $nav-color;
+    border-style: dotted;
+    border-color: $card-border-color;
     border-width: 0.2rem;
 
     .tab-content {
         border-width: 0.2rem;
         // border-style: dashed;
         border-top: none;
-        border-color: white;
+        border-color: $card-border-color;
     }
 
-    .nav-tabs {
-        border-color: white;
-        border-style: dashed;
+    .nav-pills {
+        border-color: hotpink;
+        border-style: dotted;
         border-top: none;
         border-right: none;
         border-left: none;
-        border-width: 0.2rem;
+        border-bottom: none;
+        border-width: 7rem;
+        // margin-bottom: none;
+        // padding-bottom: none;
         // background-color: $nav-color;
     }
 
-    .nav-link {
-        background-color: $nav-color;
-        color: yellow;
-        border-color: white;
-        border-style: dashed;
-        border-top-width: 0.2rem;
-    }
     p {
         color: white;
     }
+    .card-header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-between;
+        align-items: center;
+        color: $nav-color;
+        border-bottom-color: $nav-color;
+        border-bottom-width: 0.2rem;
+        border-bottom-style: dotted;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+        background-color: black;
+        padding-left: 1.5rem;
+
+        .nav-link {
+            // color: $dark-nav;
+            border-color: $card-border-color;
+            border-style: none;
+            border-top-width: none;
+            // margin-bottom: none !important;
+            // padding-bottom: none !important;
+            border-bottom: none;
+            padding-top: 0.2rem;
+            // margin-left: 1rem;
+        }
+    }
+    .card-body {
+        p {
+            color: $txt-on-gray;
+        }
+    }
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: $dark-nav;
+    background-color: black;
+    // padding-left: 0.75rem;
+    // padding-right: 0.75rem;
+}
+#po1 {
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 100;
+}
+
+#po2 {
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 600;
+}
+#po3 {
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 900;
+}
+#po4 {
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 1000;
+}
+#po5 {
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 1100;
 }
