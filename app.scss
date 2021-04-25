@@ -105,7 +105,9 @@ h5 {
 select.form-control {
     background: $nav-color !important;
 }
-
+.custom-checkbox .custom-control-label::after {
+    content: "[ ]";
+}
 .custom-control-label {
     line-height: 1.1rem;
 }
