@@ -17,6 +17,12 @@ h5 {
 
 #mainNav {
   font-size: 2rem;
+  line-height: 1rem;
+}
+@media only screen and (max-width: 768px) {
+  #mainNav {
+    line-height: 3rem;
+  }
 }
 #mainNav .nav-link {
   line-height: 2rem;
@@ -223,6 +229,19 @@ select.form-control {
   border: none !important;
   box-shadow: none !important;
   background-color: #000084;
+}
+
+.form-control:active {
+  box-shadow: -3.5px -7px 0 0 #bbbbbb, 2.5px 6.125px 0 0 #bbbbbb, -3.5px 6.125px 0 0 #bbbbbb, 2.5px -7px 0 0 #bbbbbb;
+  border: none;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: black;
+  outline: 0;
+  box-shadow: -3.5px -7px 0 0 #bbbbbb, 2.5px 6.125px 0 0 #bbbbbb, -3.5px 6.125px 0 0 #bbbbbb, 2.5px -7px 0 0 #bbbbbb;
 }
 
 /*# sourceMappingURL=app.css.map */
