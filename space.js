@@ -153,105 +153,116 @@ const displayLaunch = (launches) => {
   const launchesDiv = document.getElementById("launchesDiv");
   launchesDiv.innerHTML = "";
   launches.forEach((launch) => {
-    // console.log(launch)
-    // creates launch div
-    aLaunchSum = document.createElement("div");
-    // aLaunchSum.innerHTML = `class="tab-pane fade show active flex-wrap" id="${launch.name}-sum" role="tabpanel"
-    // aria-labelledby="${launch.name}-sum-tab"`;
-    aLaunchSum.setAttribute("id", `${launch.name}-sum`);
-    aLaunchSum.setAttribute("role", "tabpanel");
-    aLaunchSum.setAttribute("aria-labelledby", `${launch.name}-sum-tab`);
-    //   role: "tabpanel",
-    //   "aria-labelledby": `${launch.name}-sum-tab`,
-    // });
-    const sectionClasses = [
-      "tab-pane",
-      // "align-items-center",
-      "fade",
-      "flex-wrap",
-    ];
-    aLaunchSum.classList.add(...sectionClasses);
-
-    // create pic div and adds to launch div
-    picDiv = document.createElement("div");
-    const divClasses = ["col-12", "col-md-6"];
-    picDiv.classList.add(...divClasses);
-    aLaunchSum.append(picDiv);
-
-    // create pic and add to pic div
-    launchPic = document.createElement("img");
-    const imgClasses = ["img-fluid", "pic", "d-flex"];
-    launchPic.classList.add(...imgClasses);
-    if (launch.image) {
-      launchPic.src = launch.image;
-    } else {
-      launchPic.src = "imgs/takeoff.jpg";
-    }
-
-    picDiv.append(launchPic);
-
-    // creates info div and adds to launch div
-
-    infoDiv = document.createElement("div");
-    infoDiv.classList.add(...divClasses);
-    infoDiv.classList.add("blurb");
-    // infoDiv.classList.add('jumbotron')
-    aLaunchSum.append(infoDiv);
-
-    // adds title  to info
-    launchName = document.createElement("h2");
-    launchName.innerText = launch.name;
-    infoDiv.append(launchName);
-
-    launchLocation = document.createElement("p");
-    launchLocation.innerText = `from: ${launch.pad.location.name}`;
-    infoDiv.append(launchLocation);
-
-    // adds time to info
-    launchTime = document.createElement("p");
-    displayTime = new Date(launch.net).toTimeString();
-    launchTime.innerText = displayTime;
-    infoDiv.append(launchTime);
-
-    // adds count down
-    timeToLaunch = document.createElement("p");
-    timeToLaunch.setAttribute("id", `${launch.name}-counter`);
-    if (launch.net && launch.name) {
-      timeCounter(launch.net, launch.name);
-    }
-    infoDiv.append(timeToLaunch);
-
-    // adds description
-    description = document.createElement("p");
-    if (launch.mission != null) {
-      description.innerText = launch.mission.description;
-    } else {
-      description.innerText = "no description";
-    }
-    infoDiv.append(description);
-    // if (description.innerText.length > 160) {
-    //   console.log('long txt')
-    // }
-    launchProvider = document.createElement("p");
-    launchProvider.innerText = `Provider - ${launch.launch_service_provider.name}`;
-    infoDiv.append(launchProvider);
-
-    missionTyp = document.createElement("p");
-    if (launch.mission != 0) {
-      missionTyp.innerText = `Mission Type - ${launch.mission.type}`;
-    } else {
-      missionTyp.innerText = `Mission Type - Other`;
-    }
-    infoDiv.append(missionTyp);
+    cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    cardBody.classList.add("p-0");
 
     launchCardContent = document.createElement("div");
     launchCardContent.classList.add("tab-content");
     launchCardContent.setAttribute("id", `${launch.name}-tab-Content`);
+    let aLaunchSum = makeCard(launch);
+    infoCard = makeInfo(launch);
+    aLaunchSum.append(infoCard);
     launchCardContent.append(aLaunchSum);
     // add launch to launch section
 
-    launchesDiv.append(launchCardContent);
+    cardBody.append(launchCardContent);
+    launchesDiv.append(cardBody);
   });
+};
+
+const makeCard = (launch) => {
+  someLaunchDiv = document.createElement("div");
+  // aLaunchSum.innerHTML = `class="tab-pane fade show active flex-wrap" id="${launch.name}-sum" role="tabpanel"
+  // aria-labelledby="${launch.name}-sum-tab"`;
+  someLaunchDiv.setAttribute("id", `${launch.name}-sum`);
+  someLaunchDiv.setAttribute("role", "tabpanel");
+  someLaunchDiv.setAttribute("aria-labelledby", `${launch.name}-sum-tab`);
+  //   role: "tabpanel",
+  //   "aria-labelledby": `${launch.name}-sum-tab`,
+  // });
+  const sectionClasses = [
+    "tab-pane",
+    // "align-items-center",
+    "fade",
+    "flex-wrap",
+  ];
+  someLaunchDiv.classList.add(...sectionClasses);
+  return someLaunchDiv;
+};
+
+const makeInfo = (launch, aLaunchSum) => {
+  // create pic div and adds to launch div
+  picDiv = document.createElement("div");
+  const divClasses = ["col-12", "col-md-6"];
+  picDiv.classList.add(...divClasses);
+
+  // create pic and add to pic div
+  launchPic = document.createElement("img");
+  const imgClasses = ["img-fluid", "pic", "d-flex"];
+  launchPic.classList.add(...imgClasses);
+  if (launch.image) {
+    launchPic.src = launch.image;
+  } else {
+    launchPic.src = "imgs/takeoff.jpg";
+  }
+
+  picDiv.append(launchPic);
+
+  // creates info div and adds to launch div
+
+  infoDiv = document.createElement("div");
+  infoDiv.classList.add(...divClasses);
+  infoDiv.classList.add("blurb");
+  // infoDiv.classList.add('jumbotron')
+
+  // adds title  to info
+  launchName = document.createElement("h2");
+  launchName.innerText = launch.name;
+  infoDiv.append(launchName);
+
+  launchLocation = document.createElement("p");
+  launchLocation.innerText = `from: ${launch.pad.location.name}`;
+  infoDiv.append(launchLocation);
+
+  // adds time to info
+  launchTime = document.createElement("p");
+  displayTime = new Date(launch.net).toTimeString();
+  launchTime.innerText = displayTime;
+  infoDiv.append(launchTime);
+
+  // adds count down
+  timeToLaunch = document.createElement("p");
+  timeToLaunch.setAttribute("id", `${launch.name}-counter`);
+  if (launch.net && launch.name) {
+    timeCounter(launch.net, launch.name);
+  }
+  infoDiv.append(timeToLaunch);
+
+  // adds description
+  description = document.createElement("p");
+  if (launch.mission != null) {
+    description.innerText = launch.mission.description;
+  } else {
+    description.innerText = "no description";
+  }
+  infoDiv.append(description);
+  // if (description.innerText.length > 160) {
+  //   console.log('long txt')
+  // }
+  launchProvider = document.createElement("p");
+  launchProvider.innerText = `Provider - ${launch.launch_service_provider.name}`;
+  infoDiv.append(launchProvider);
+
+  missionTyp = document.createElement("p");
+  if (launch.mission != 0) {
+    missionTyp.innerText = `Mission Type - ${launch.mission.type}`;
+  } else {
+    missionTyp.innerText = `Mission Type - Other`;
+  }
+  infoDiv.append(missionTyp);
+
+  return infoDiv, picDiv;
 };
 
 //  removing doubles function
