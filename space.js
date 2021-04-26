@@ -1,10 +1,10 @@
-// let's declare some params !!
+//*================== let's declare some params... =================*//
 
 let offset = 0;
 let filters = false;
 let lowestScrl = 0;
 
-// adds   launches function
+/*=======adds launches function =======*/
 
 const addLaunchs = (max = 1000) => {
   limit = max;
@@ -16,9 +16,6 @@ const addLaunchs = (max = 1000) => {
     })
     .catch((e) => {})
     .then((data) => {
-      // displayLaunch(data.results)
-
-      // console.log('data',data.results)
       createOptions(data.results);
       addEvents(data.results);
       document.getElementById("loading").style.display = "none";
@@ -43,14 +40,19 @@ if (document.title === "UPCOMING LAUNCHES") {
 //     offset = offset + 10;
 //     addLaunchs();
 //     lowestScrl = current
-//   }
+//   }//
 // }
 // window.addEventListener('scroll', event => onScroll(event));
-//       create Select Options for agency and location ;
+
+/**==============================================
+ **              createOptions()
+ *?  create Select Options for agency and location ?
+ *@param name type
+ *@param name type
+ *@return type
+ *=============================================**/
 
 const createOptions = (launches) => {
-  // let agencies = launches.map((launch) => {return launch.launch_service_provider.name;});
-
   let locations = removeDuble(
     launches.map((launch) => {
       return launch.pad.location.name;
@@ -64,21 +66,18 @@ const createOptions = (launches) => {
   );
 
   let agencySelector = document.getElementById("agencySelect");
-  let temporary = "<option value='all'>All</option>";
+  let tempAgency = `<option value="all">All</option>`;
   agencies.forEach((agency) => {
-    let option = document.createElement("option");
-    option.innerHTML = agency;
-    option.setAttribute("value", agency);
-    agencySelector.appendChild(option);
+    tempAgency += `<option value="${agency}">${agency}</option>`;
   });
+  agencySelector.innerHTML = tempAgency;
 
   let locationSelector = document.getElementById("locationSelect");
+  let tempLocation = `<option value="all">All</option>`;
   locations.forEach((location) => {
-    let option = document.createElement("option");
-    option.innerHTML = location;
-    option.setAttribute("value", location);
-    locationSelector.appendChild(option);
+    tempLocation += `<option value="${location}">${location}</option>`;
   });
+  locationSelector.innerHTML = tempLocation;
 };
 
 // adding listeners for dropdowns and checkboxes
@@ -97,13 +96,7 @@ const addEvents = (results) => {
   // let agencyDrop = document.querySelectorAll("#agencySelect")
   let agencyDrop = document.getElementById("agencySelect");
   let locationDrop = document.getElementById("locationSelect");
-  // console.log(agencyDrop)
-  // agencyDrop.forEach((listi) => {
-  //   listi.addEventListener("change", () => {
-  //     filterData(results)
-  //     console.log('!!!!222!!!!',results)
-  //   });
-  // });
+
   agencyDrop.addEventListener("change", () => {
     filterData(results);
   });
@@ -153,34 +146,109 @@ const displayLaunch = (launches) => {
   const launchesDiv = document.getElementById("launchesDiv");
   launchesDiv.innerHTML = "";
   launches.forEach((launch) => {
+    launchNameShort = launch.name.replace(/\s+/g, "");
+    launchNameShort = launchNameShort.replace("|", "-");
+    console.log(launch.name);
+    console.log(launchNameShort);
+    card = document.createElement("div");
+    card.setAttribute("id", `${launchNameShort}-card`);
+    cardClasses = ["card", "aLaunch", "mt-3", "pt-0", "mb-3", "pb-3"];
+    // card.classList.add("aLaunch");
+    // card.classList.add("mt-3");
+    // card.classList.add("pt-0");
+    // card.classList.add("mt-3");
+    // card.classList.add("pt-0");
+    card.classList.add(...cardClasses);
+
     cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
     cardBody.classList.add("p-0");
 
     launchCardContent = document.createElement("div");
+    launchCardContent.setAttribute("id", `${launchNameShort}-card-content`);
     launchCardContent.classList.add("tab-content");
-    launchCardContent.setAttribute("id", `${launch.name}-tab-Content`);
-    let aLaunchSum = makeCard(launch);
+    launchCardContent.setAttribute("id", `${launchNameShort}-tab-Content`);
+
+    let aLaunchSum = makeTab(launchNameShort, "summary");
+    aLaunchSum.classList.add("show");
     infoCard = makeInfo(launch);
-    aLaunchSum.append(infoCard);
+    aLaunchSum.append(...infoCard);
     launchCardContent.append(aLaunchSum);
-    // add launch to launch section
+
+    let aLaunchAgency = makeTab(launchNameShort, "agency");
+    // aLaunchSum.classList.add("show");
+    agencyCard = makeAgency(launch);
+    aLaunchAgency.append(agencyCard);
+    launchCardContent.append(aLaunchAgency);
 
     cardBody.append(launchCardContent);
-    launchesDiv.append(cardBody);
+
+    cardHead = document.createElement("div");
+    cardHead.setAttribute("id", `${launchNameShort}-card-head`);
+    cardHead.classList.add("card-header");
+    cardHeadParts = giveHead(launchNameShort, ["summary", "agency"]);
+    // console.log(launch.name);
+    cardHead.append(...cardHeadParts);
+
+    card.append(cardHead);
+    card.append(cardBody);
+    // add launch to launch section
+    launchesDiv.append(card);
   });
 };
 
-const makeCard = (launch) => {
+const giveHead = (launchName, parts) => {
+  cardLinks = document.createElement("div");
+  tabs = document.createElement("ul");
+  // ul class="nav nav-pills card-header-tabs" id="${launch.name}-tab" role="tablist"
+  const ulClassesi = ["nav", "nav-pills", "card-header-tabs"];
+  tabs.classList.add(...ulClassesi);
+  tabs.setAttribute("id", `${launchName}-linkList`);
+  tabs.setAttribute("role", "tablist");
+  items = makeItems(launchName, parts);
+  tabs.append(...items);
+  cardLinks.append(tabs);
+
+  cardTitle = document.createElement("div");
+  cardTitle.innerHTML = launchName;
+
+  return [cardLinks, cardTitle];
+};
+
+const makeItems = (launchName, parts) => {
+  let items = [];
+  parts.forEach((part) => {
+    li = document.createElement("li");
+    li.classList.add("nav-item");
+    li.setAttribute("role", "presentation");
+    linki = document.createElement("a");
+    linki.classList.add("nav-link");
+    if (part == "summary") {
+      linki.classList.add("active");
+    }
+    linki.setAttribute("id", `${launchName}-${part}-tab`);
+    linki.setAttribute("data-toggle", "pill");
+    linki.setAttribute("href", `#${launchName}-${part}`);
+    linki.setAttribute("role", "pill");
+    linki.setAttribute("aria-controls", `${launchName}-${part}`);
+    if (part == "summary") {
+      linki.setAttribute("aria-selected", "true");
+    } else {
+      linki.setAttribute("aria-selected", "false");
+    }
+    linki.innerHTML = part;
+    li.append(linki);
+    items.push(li);
+  });
+  // console.log(items);
+  return items;
+};
+
+const makeTab = (launchName, tab) => {
   someLaunchDiv = document.createElement("div");
-  // aLaunchSum.innerHTML = `class="tab-pane fade show active flex-wrap" id="${launch.name}-sum" role="tabpanel"
-  // aria-labelledby="${launch.name}-sum-tab"`;
-  someLaunchDiv.setAttribute("id", `${launch.name}-sum`);
+  someLaunchDiv.setAttribute("id", `${launchName}-${tab}`);
   someLaunchDiv.setAttribute("role", "tabpanel");
-  someLaunchDiv.setAttribute("aria-labelledby", `${launch.name}-sum-tab`);
-  //   role: "tabpanel",
-  //   "aria-labelledby": `${launch.name}-sum-tab`,
-  // });
+  someLaunchDiv.setAttribute("aria-labelledby", `${launchName}-${tab}-tab`);
   const sectionClasses = [
     "tab-pane",
     // "align-items-center",
@@ -191,7 +259,7 @@ const makeCard = (launch) => {
   return someLaunchDiv;
 };
 
-const makeInfo = (launch, aLaunchSum) => {
+const makeInfo = (launch) => {
   // create pic div and adds to launch div
   picDiv = document.createElement("div");
   const divClasses = ["col-12", "col-md-6"];
@@ -262,7 +330,13 @@ const makeInfo = (launch, aLaunchSum) => {
   }
   infoDiv.append(missionTyp);
 
-  return infoDiv, picDiv;
+  return [infoDiv, picDiv];
+};
+
+const makeAgency = (launch) => {
+  bob = document.createElement("p");
+  bob.innerHTML = "dfsjlkdfj";
+  return bob;
 };
 
 //  removing doubles function
@@ -277,53 +351,6 @@ const removeDuble = (toClean) => {
   return cleaned;
 };
 
-// const filterData = (launches) => {
-
-//   let selectedAgency = document.getElementById("agencySelect").value;
-//   // console.log(selectedAgency);
-//   let selectedLocation = document.getElementById('locationSelect').value;
-//   let filteredData = [];
-//   if (!selectedAgency || selectedAgency == "all") {
-//     // launches.forEach((launch) => { filteredData.push(launch);})
-//     displayLaunch(launches);
-//   } else {
-//     launches.forEach((launch) => {
-//       if (launch.launch_service_provider.name == selectedAgency) {
-//         filteredData.push(launch);
-//         console.log(`launch.launch_service_provider.name is ${launch.launch_service_provider.name} selectedagency is ${selectedAgency}`)
-//       }
-//     })
-//   }
-//   console.log('filtered data ',filteredData)
-//   displayLaunch(filteredData)
-// }
-
-// const filterData = (breeds) => {
-//   let checkboxes = Array.from(
-//     document.querySelectorAll("input[type=checkbox]:checked")
-//   ).map((checkbox) => {
-//     return checkbox.value;
-//   });
-//   let selectElm = document.getElementById("country-select").value;
-//   console.log(selectElm);
-//   console.log(checkboxes);
-
-//   if (selectElm !== "all" || checkboxes.length !== 0) {
-//     console.log("here");
-//   }
-//   let filteredData = [];
-//   if (checkboxes.length === 0) {
-//     displayData(breeds);
-//   } else {
-//     breeds.forEach((breed) => {
-//       if (checkboxes.includes(breed.origin)) {
-//         filteredData.push(breed);
-//       }
-//     });
-//     displayData(filteredData);
-//   }
-// };
-
 const filterData = (launches) => {
   let selectedAgency = document.getElementById("agencySelect").value;
   let selectedLocation = document.getElementById("locationSelect").value;
@@ -333,31 +360,7 @@ const filterData = (launches) => {
   ).map((checkbox) => {
     return checkbox.value;
   });
-  console.log(checkboxes);
-
-  // launches.forEach((launch) => {
-  //   if (selectedAgency == "all" && selectedLocation == "all") {
-  //     filteredData.push(launch);
-  //   } else if (selectedAgency == launch.launch_service_provider.name) {
-  //     if (selectedLocation == "all") {
-  //       filteredData.push(launch);
-  //     } else if (selectedLocation == launch.pad.location.name) {
-  //       filteredData.push(launch);
-  //     }
-  //   } else if (selectedLocation == launch.pad.location.name) {
-  //     if (selectedAgency == "all") {
-  //       filteredData.push(launch);
-  //     } else if (selectedAgency == launch.launch_service_provider.name) {
-  //       filteredData.push(launch);
-  //     }
-  //   }
-  // });
-  // if (filteredData.length > 0) {
-  //   // console.log(filteredData)
-  //   displayLaunch(filteredData);
-  // } else {
-  //   noResults();
-  // }
+  // console.log(checkboxes);
 
   let filtered = launches.filter((launch) => {
     if (launch.mission == null) {
@@ -400,7 +403,7 @@ const filterData = (launches) => {
     displayLaunch(filtered);
   }
 
-  console.log(filtered);
+  // console.log(filtered);
 };
 
 const noResults = () => {
