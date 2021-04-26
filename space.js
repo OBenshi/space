@@ -171,12 +171,13 @@ const displayLaunch = (launches) => {
 
     let aLaunchSum = makeTab(launchNameShort, "summary");
     aLaunchSum.classList.add("show");
+    aLaunchSum.classList.add("active");
     infoCard = makeInfo(launch);
     aLaunchSum.append(...infoCard);
     launchCardContent.append(aLaunchSum);
 
     let aLaunchAgency = makeTab(launchNameShort, "agency");
-    // aLaunchSum.classList.add("show");
+    // aLaunchAgency.classList.add("show");
     agencyCard = makeAgency(launch);
     aLaunchAgency.append(agencyCard);
     launchCardContent.append(aLaunchAgency);
