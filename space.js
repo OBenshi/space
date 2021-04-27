@@ -32,14 +32,19 @@ if (document.title === "UPCOMING LAUNCHES") {
   addLaunchs();
 }
 
-const addAgency = (agencyId) => {
+const addAgency = (agencyId, divId) => {
   fetch(`https://lldev.thespacedevs.com/2.2.0/agencies/${agencyId}/`)
     .then((res) => {
       return res.json();
     })
     .catch((e) => {})
     .then((data) => {
-      console.log(data);
+      shell = document.getElementById(`${divId.substring(1)}`);
+      agencyContent = makeAgency(data, shell);
+      console.log(shell);
+      // shell.innerHTML=""
+      // shell.append(...agencyContent)
+      // console.log(document.querySelector(`${divId}`))
     })
     .catch((e) => {
       console.log("we do not have data", e);
@@ -163,6 +168,7 @@ const displayLaunch = (launches) => {
   launchesDiv.innerHTML = "";
   launches.forEach((launch) => {
     launchNameShort = makeHtmlId(launch.name);
+    // console.log(launchNameShort)
     // launch.name.replace(/\s+/g, "");
     // launchNameShort = launchNameShort.replace("|", "-");
     // console.log(launch.name);
@@ -199,8 +205,8 @@ const displayLaunch = (launches) => {
     launchCardContent.append(aLaunchAgency);
 
     let aLaunchLocation = makeTab(launchNameShort, "location");
-    locationCard = makeLocation(launch);
-    aLaunchLocation.append(locationCard);
+    locationCard = makeLocation(launch.pad);
+    // aLaunchLocation.append(locationCard);
     launchCardContent.append(aLaunchLocation);
 
     cardBody.append(launchCardContent);
@@ -209,6 +215,7 @@ const displayLaunch = (launches) => {
     cardHead.setAttribute("id", `${launchNameShort}-card-head`);
     cardHead.classList.add("card-header");
     cardHeadParts = giveHead(
+      launch.name,
       launchNameShort,
       ["summary", "agency", "location"],
       launch.launch_service_provider.id
@@ -222,15 +229,15 @@ const displayLaunch = (launches) => {
   });
 };
 
-const giveHead = (launchName, parts, agencyId) => {
+const giveHead = (launchName, launchNameShort, parts, agencyId) => {
   cardLinks = document.createElement("div");
   tabs = document.createElement("ul");
   // ul class="nav nav-pills card-header-tabs" id="${launch.name}-tab" role="tablist"
   const ulClassesi = ["nav", "nav-pills", "card-header-tabs"];
   tabs.classList.add(...ulClassesi);
-  tabs.setAttribute("id", `${launchName}-linkList`);
+  tabs.setAttribute("id", `${launchNameShort}-linkList`);
   tabs.setAttribute("role", "tablist");
-  items = makeItems(launchName, parts, agencyId);
+  items = makeItems(launchNameShort, parts, agencyId);
   tabs.append(...items);
   cardLinks.append(tabs);
 
@@ -243,7 +250,7 @@ const giveHead = (launchName, parts, agencyId) => {
 const makeItems = (launchName, parts, agencyId) => {
   let items = [];
   parts.forEach((part) => {
-    console.log(agencyId);
+    // console.log(agencyId);
     li = document.createElement("li");
     li.classList.add("nav-item");
     li.setAttribute("role", "presentation");
@@ -251,8 +258,14 @@ const makeItems = (launchName, parts, agencyId) => {
     linki.classList.add("nav-link");
     if (part == "summary") {
       linki.classList.add("active");
+    } else if (part == "agency") {
+      linki.addEventListener("click", (event) => {
+        // console.log(event);
+        divId = event.toElement.hash;
+        addAgency(agencyId, divId);
+      });
     }
-    linki.addEventListener("click", addAgency(agencyId));
+
     linki.setAttribute("id", `${launchName}-${part}-tab`);
     linki.setAttribute("data-toggle", "pill");
     linki.setAttribute("href", `#${launchName}-${part}`);
@@ -308,7 +321,7 @@ const makeInfo = (launch) => {
 
   infoDiv = document.createElement("div");
   infoDiv.classList.add(...divClasses);
-  infoDiv.classList.add("blurb");
+  infoDiv.classList.add("launchBlurb");
   // infoDiv.classList.add('jumbotron')
 
   // adds title  to info
@@ -336,10 +349,10 @@ const makeInfo = (launch) => {
 
   // adds description
   description = document.createElement("p");
-  if (launch.mission != null) {
+  if (launch.mission.description && launch.mission.description != null) {
     description.innerText = launch.mission.description;
   } else {
-    description.innerText = "no description";
+    description.innerText = "no launch description";
   }
   infoDiv.append(description);
   // if (description.innerText.length > 160) {
@@ -357,19 +370,141 @@ const makeInfo = (launch) => {
   }
   infoDiv.append(missionTyp);
 
-  return [infoDiv, picDiv];
+  return [picDiv, infoDiv];
 };
 
-const makeContentShell = (launch, contentType) => {
-  let agencyTabContent = document.createElement("div");
-  agencyTabContent.setAttribute("id", `${makeHtmlId(launch.name)}`);
-  return agencyTabContent;
+const makeAgency = (agency, shell) => {
+  console.log(agency);
+  // create pic div
+  picDiv = document.createElement("div");
+  const divClasses = ["col-12", "col-md-6"];
+  picDiv.classList.add(...divClasses);
+
+  // create pic and add to pic div
+  agencyPic = document.createElement("img");
+  const imgClasses = ["img-fluid", "pic", "d-flex"];
+  agencyPic.classList.add(...imgClasses);
+  if (agency.logo_url && agency.logo_url != null) {
+    agencyPic.src = agency.logo_url;
+  } else {
+    agencyPic.src =
+      "imgs/DFRC_mission_control_during_X-29_test_flight_(EC89-0300-1).jpeg";
+  }
+  // let testing = document.createElement("p");
+  // testing.innerText = "testing 123";
+  picDiv.append(agencyPic);
+
+  // creates info div
+
+  infoDiv = document.createElement("div");
+  infoDiv.classList.add(...divClasses);
+  infoDiv.classList.add("launchBlurb");
+  // infoDiv.classList.add('jumbotron')
+
+  // adds title  to info
+  agencyName = document.createElement("h2");
+  agencyName.innerText = agency.name;
+  infoDiv.append(agencyName);
+
+  abbv = document.createElement("p");
+  abbv.innerText = `agency abbreviation: ${agency.abbrev}`;
+  infoDiv.append(abbv);
+
+  if (agency.country_code != null) {
+    agencyCountry = document.createElement("p");
+    agencyCountry.innerText = `country code: ${agency.country_code}`;
+    infoDiv.append(agencyCountry);
+  }
+
+  if (agency.type != null) {
+    agencyType = document.createElement("p");
+    agencyType.innerText = `type: ${agency.type}`;
+    infoDiv.append(agencyType);
+  }
+
+  if (agency.founding_year && agency.founding_year != null) {
+    agencyBday = document.createElement("p");
+    agencyBday.innerText = `founding year: ${agency.founding_year}`;
+    infoDiv.append(agencyBday);
+  }
+
+  totalLaunches = document.createElement("p");
+  totalLaunches.innerText = `total launch count; ${agency.total_launch_count}`;
+  infoDiv.append(totalLaunches);
+
+  successfulLaunches = document.createElement("p");
+  successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
+  infoDiv.append(successfulLaunches);
+
+  shell.innerHTML = "";
+  shell.append(picDiv);
+  shell.append(infoDiv);
 };
 
 const makeLocation = (launch) => {
-  tom = document.createElement("p");
-  tom.innerText = "12334";
-  return tom;
+  picDiv = document.createElement("div");
+  const divClasses = ["col-12", "col-md-6"];
+  picDiv.classList.add(...divClasses);
+
+  // create pic and add to pic div
+  locationPic = document.createElement("img");
+  const imgClasses = ["img-fluid", "pic", "d-flex"];
+  locationPic.classList.add(...imgClasses);
+  if (agency.logo_url && agency.logo_url != null) {
+    agencyPic.src = agency.logo_url;
+  } else {
+    agencyPic.src =
+      "imgs/DFRC_mission_control_during_X-29_test_flight_(EC89-0300-1).jpeg";
+  }
+  // let testing = document.createElement("p");
+  // testing.innerText = "testing 123";
+  picDiv.append(agencyPic);
+
+  // creates info div
+
+  infoDiv = document.createElement("div");
+  infoDiv.classList.add(...divClasses);
+  infoDiv.classList.add("launchBlurb");
+  // infoDiv.classList.add('jumbotron')
+
+  // adds title  to info
+  agencyName = document.createElement("h2");
+  agencyName.innerText = agency.name;
+  infoDiv.append(agencyName);
+
+  abbv = document.createElement("p");
+  abbv.innerText = `agency abbreviation: ${agency.abbrev}`;
+  infoDiv.append(abbv);
+
+  if (agency.country_code != null) {
+    agencyCountry = document.createElement("p");
+    agencyCountry.innerText = `country code: ${agency.country_code}`;
+    infoDiv.append(agencyCountry);
+  }
+
+  if (agency.type != null) {
+    agencyType = document.createElement("p");
+    agencyType.innerText = `type: ${agency.type}`;
+    infoDiv.append(agencyType);
+  }
+
+  if (agency.founding_year && agency.founding_year != null) {
+    agencyBday = document.createElement("p");
+    agencyBday.innerText = `founding year: ${agency.founding_year}`;
+    infoDiv.append(agencyBday);
+  }
+
+  totalLaunches = document.createElement("p");
+  totalLaunches.innerText = `total launch count; ${agency.total_launch_count}`;
+  infoDiv.append(totalLaunches);
+
+  successfulLaunches = document.createElement("p");
+  successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
+  infoDiv.append(successfulLaunches);
+
+  shell.innerHTML = "";
+  shell.append(picDiv);
+  shell.append(infoDiv);
 };
 
 //  removing doubles function
@@ -385,8 +520,9 @@ const removeDuble = (toClean) => {
 };
 
 const makeHtmlId = (launchName) => {
-  launchName.replace(/\s+/g, "");
-  launchName.replace("|", "-");
+  launchName = launchName.replace(/\s+/g, "");
+  launchName = launchName.replace(/\W/g, "");
+  launchName = launchName.replace("|", "-");
   return launchName;
 };
 

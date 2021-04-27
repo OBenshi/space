@@ -1,253 +1,527 @@
-// let offset = 0;
-const addLaunchsi = (max = 800) => {
-  limit = max;
-  fetch(
-    `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
-  )
-    .then((res) => {
-      return res.json();
-    })
-    .catch((e) => {})
-    .then((data) => {
-      let msntyp = removeDuble(
-        data.results.map((launch) => {
-          if (launch.launch_service_provider != null) {
-            return launch.launch_service_provider;
-          } else {
-            return "other";
-          }
-        })
-      );
-      msntyp.sort();
-      console.log(msntyp);
-    })
-    .catch((e) => {
-      console.log("we do not have data", e);
-      document.body.append("fuck my life");
-    });
-};
-addLaunchsi();
-// flex - wrap flex - md - nowrap
-const addAgency = (agencyId) => {
-  limit = max;
-  fetch(`https://lldev.thespacedevs.com/2.2.0/agencies/${agencyId}/`)
-    .then((res) => {
-      return res.json();
-    })
-    .catch((e) => {})
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((e) => {
-      console.log("we do not have data", e);
-      document.body.append("fuck my life");
-    });
+const min = {
+  id: 1,
+  url: "https://lldev.thespacedevs.com/2.2.0/agencies/1/",
+  name: "Belarus Space Agency",
+  featured: false,
+  type: "Government",
+  country_code: "BLR",
+  abbrev: "BSA",
+  description: null,
+  administrator: null,
+  founding_year: null,
+  launchers: "",
+  spacecraft: "",
+  parent: null,
+  launch_library_url: "https://launchlibrary.net/1.4/agency/1",
+  total_launch_count: 0,
+  successful_launches: 0,
+  consecutive_successful_launches: 0,
+  failed_launches: 0,
+  pending_launches: 0,
+  successful_landings: 0,
+  failed_landings: 0,
+  attempted_landings: 0,
+  consecutive_successful_landings: 0,
+  info_url: null,
+  wiki_url: "http://en.wikipedia.org/wiki/Belarus_Space_Agency",
+  logo_url: null,
+  image_url: null,
+  nation_url: null,
+  launcher_list: [],
+  spacecraft_list: [],
 };
 
-const myKey = config.MY_KEY;
-
-// Get an array of recipes with axios(and with async await func)
-// This data includes ID that can be used to request the data of ingredients as below (getInfredients())
-const fetchRecipes = async () => {
-  try {
-    const res = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&sort=random&apiKey=${myKey}`
-    );
-    // searchedRecipes = [];
-    return res.data.results;
-    //return res.data.results;
-  } catch (e) {
-    console.log(e);
-  }
+const max = {
+  id: 121,
+  url: "https://lldev.thespacedevs.com/2.2.0/agencies/121/",
+  name: "SpaceX",
+  featured: true,
+  type: "Commercial",
+  country_code: "USA",
+  abbrev: "SpX",
+  description:
+    "Space Exploration Technologies Corp., known as SpaceX, is an American aerospace manufacturer and space transport services company headquartered in Hawthorne, California. It was founded in 2002 by entrepreneur Elon Musk with the goal of reducing space transportation costs and enabling the colonization of Mars. SpaceX has many pads, on the East Coast of the US they own SLC-40 at Cape Canaveral and LC-39A at the Kennedy Space Center for their lower inclination launches. They also own SLC-4E at Vandenberg, California for their high inclination launches. Another site is also being developed at Boca Chica, Texas.",
+  administrator: "CEO: Elon Musk",
+  founding_year: "2002",
+  launchers: "Falcon",
+  spacecraft: "Dragon",
+  parent: null,
+  launch_library_url: "https://launchlibrary.net/1.4/agency/121",
+  total_launch_count: 132,
+  successful_launches: 121,
+  consecutive_successful_launches: 1,
+  failed_launches: 9,
+  pending_launches: 39,
+  successful_landings: 86,
+  failed_landings: 17,
+  attempted_landings: 106,
+  consecutive_successful_landings: 0,
+  info_url: "http://www.spacex.com/",
+  wiki_url: "http://en.wikipedia.org/wiki/SpaceX",
+  logo_url:
+    "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/logo/spacex_logo_20191121063502.png",
+  image_url:
+    "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/agency_images/spacex_image_20190207032501.jpeg",
+  nation_url:
+    "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/agency_nation/spacex_nation_20190207032501.jpeg",
+  launcher_list: [
+    {
+      id: 133,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/133/",
+      name: "Falcon",
+      description:
+        "The Falcon 1 was the first launch vehicle developed and manufactured by SpaceX in 2006. It is an expendable, two stage rocket where each stage is powered by a single LOX/RP1 engine.",
+      family: "Falcon",
+      full_name: "Falcon 1",
+      variant: "1",
+      alias: "",
+      min_stage: 2,
+      max_stage: 2,
+      length: 22.25,
+      diameter: 1.7,
+      maiden_flight: "2006-03-24",
+      launch_mass: 33,
+      leo_capacity: 470,
+      gto_capacity: null,
+      to_thrust: 454,
+      apogee: null,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon_image_20190222030438.jpeg",
+      info_url: null,
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_1",
+      consecutive_successful_launches: 2,
+      successful_launches: 2,
+      failed_launches: 3,
+      pending_launches: 0,
+    },
+    {
+      id: 145,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/145/",
+      name: "Falcon 9 Block 4",
+      description:
+        "The Full Thrust variants first stage includes all systems necessary for an operational re-use of stages while the second stage is operated as an expendable rocket stage.",
+      family: "Falcon",
+      full_name: "Falcon 9 Block 4",
+      variant: "Block 4",
+      alias: "",
+      min_stage: 2,
+      max_stage: 2,
+      length: 71,
+      diameter: 3.65,
+      maiden_flight: "2015-12-22",
+      launch_mass: 546,
+      leo_capacity: 22800,
+      gto_capacity: 8305,
+      to_thrust: 6804,
+      apogee: 197,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon252092520block25204_image_20190222031140.jpeg",
+      info_url: "http://www.spacex.com/falcon9",
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_9_full_thrust",
+      consecutive_successful_launches: 12,
+      successful_launches: 12,
+      failed_launches: 0,
+      pending_launches: 0,
+    },
+    {
+      id: 164,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/164/",
+      name: "Falcon 9 Block 5",
+      description:
+        "Falcon 9 is a two-stage rocket designed and manufactured by SpaceX for the reliable and safe transport of satellites and the Dragon spacecraft into orbit. The Block 5 variant is the fifth major interval aimed at improving upon the ability for rapid reusability.",
+      family: "Falcon",
+      full_name: "Falcon 9 Block 5",
+      variant: "Block 5",
+      alias: "",
+      min_stage: 1,
+      max_stage: 2,
+      length: 70,
+      diameter: 3.65,
+      maiden_flight: "2018-05-11",
+      launch_mass: 549,
+      leo_capacity: 22800,
+      gto_capacity: 8300,
+      to_thrust: 7607,
+      apogee: 200,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon25209_image_20190224025007.jpeg",
+      info_url: "http://www.spacex.com/falcon9",
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_9",
+      consecutive_successful_launches: 57,
+      successful_launches: 57,
+      failed_launches: 0,
+      pending_launches: 31,
+    },
+    {
+      id: 55,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/55/",
+      name: "Falcon 9 Full Thrust",
+      description:
+        "The Full Thrust variants first stage includes all systems necessary for an operational re-use of stages while the second stage is operated as an expendable rocket stage.",
+      family: "Falcon",
+      full_name: "Falcon 9 Full Thrust",
+      variant: "Full Thrust",
+      alias: "",
+      min_stage: 2,
+      max_stage: 2,
+      length: 71,
+      diameter: 3.65,
+      maiden_flight: "2015-12-22",
+      launch_mass: 546,
+      leo_capacity: 22800,
+      gto_capacity: 8305,
+      to_thrust: 6804,
+      apogee: 200,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon252092520full2520thrust_image_20190222031117.jpeg",
+      info_url: "http://www.spacex.com/falcon9",
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_9",
+      consecutive_successful_launches: 16,
+      successful_launches: 24,
+      failed_launches: 1,
+      pending_launches: 0,
+    },
+    {
+      id: 169,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/169/",
+      name: "Falcon 9 v1.0",
+      description:
+        "The Falcon 9 v1.0 first stage was used on the first five Falcon 9 launches, and powered by nine SpaceX Merlin 1C rocket engines arranged in a 3x3 pattern.",
+      family: "Falcon",
+      full_name: "Falcon 9 v1.0",
+      variant: "v1.0",
+      alias: "",
+      min_stage: 2,
+      max_stage: 2,
+      length: 47.8,
+      diameter: 3.65,
+      maiden_flight: "2010-06-04",
+      launch_mass: 318,
+      leo_capacity: 9300,
+      gto_capacity: 3400,
+      to_thrust: 3807,
+      apogee: 200,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon252092520v1.0_image_20190222030703.jpeg",
+      info_url: "http://www.spacex.com/falcon9",
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_9_v1.0",
+      consecutive_successful_launches: 1,
+      successful_launches: 4,
+      failed_launches: 1,
+      pending_launches: 0,
+    },
+    {
+      id: 14,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/14/",
+      name: "Falcon 9 v1.1",
+      description:
+        "Falcon 9 v1.1 is a significantly redesigned version of the its predecessor, including a higher payload capacity. This version arranges the engines in a structural form SpaceX calls an Octaweb.",
+      family: "Falcon",
+      full_name: "Falcon 9 v1.1",
+      variant: "v1.1",
+      alias: "",
+      min_stage: 2,
+      max_stage: 2,
+      length: 68.4,
+      diameter: 3.65,
+      maiden_flight: "2013-09-29",
+      launch_mass: 506,
+      leo_capacity: 13150,
+      gto_capacity: 4850,
+      to_thrust: 5883,
+      apogee: 200,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon252092520v1.1_image_20190222030927.jpeg",
+      info_url: "http://www.spacex.com/falcon9",
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_9_v1.1",
+      consecutive_successful_launches: 1,
+      successful_launches: 14,
+      failed_launches: 1,
+      pending_launches: 0,
+    },
+    {
+      id: 161,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/161/",
+      name: "Falcon Heavy",
+      description:
+        "The Falcon Heavy is a variant of the Falcon 9 full thrust launch vehicle and will consist of a standard Falcon 9 rocket core, with two additional boosters derived from the Falcon 9 first stage.",
+      family: "Falcon",
+      full_name: "Falcon Heavy",
+      variant: "Heavy",
+      alias: "",
+      min_stage: 3,
+      max_stage: 3,
+      length: 70,
+      diameter: 12.2,
+      maiden_flight: "2018-02-06",
+      launch_mass: 1400,
+      leo_capacity: 63800,
+      gto_capacity: 26700,
+      to_thrust: 22819,
+      apogee: 200,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/falcon2520heavy_image_20190224025007.jpeg",
+      info_url: "http://www.spacex.com/falcon-heavy",
+      wiki_url: "https://en.wikipedia.org/wiki/Falcon_Heavy",
+      consecutive_successful_launches: 3,
+      successful_launches: 3,
+      failed_launches: 0,
+      pending_launches: 7,
+    },
+    {
+      id: 207,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/207/",
+      name: "Starship Prototype",
+      description:
+        "Prototype of SpaceX's Starship, a fully reusable second stage and space vehicle.",
+      family: "Starship",
+      full_name: "Starship Prototype",
+      variant: "Prototype",
+      alias: "",
+      min_stage: 1,
+      max_stage: 1,
+      length: 50,
+      diameter: 9,
+      maiden_flight: "2019-07-26",
+      launch_mass: 45,
+      leo_capacity: null,
+      gto_capacity: null,
+      to_thrust: null,
+      apogee: null,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/starship_protot_image_20201211072211.png",
+      info_url: "https://www.spacex.com/vehicles/starship/",
+      wiki_url: "https://en.wikipedia.org/wiki/SpaceX_Starship",
+      consecutive_successful_launches: 0,
+      successful_launches: 5,
+      failed_launches: 3,
+      pending_launches: 1,
+    },
+    {
+      id: 463,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/launcher/463/",
+      name: "Super Heavy Prototype",
+      description:
+        "Prototype of SpaceX's Super Heavy, a fully reusable first stage for the Starship space vehicle.",
+      family: "Starship",
+      full_name: "Super Heavy Prototype",
+      variant: "Prototype",
+      alias: "",
+      min_stage: 1,
+      max_stage: 1,
+      length: 70,
+      diameter: 9,
+      maiden_flight: null,
+      launch_mass: 300,
+      leo_capacity: null,
+      gto_capacity: null,
+      to_thrust: null,
+      apogee: null,
+      vehicle_range: null,
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/super_heavy_pro_image_20210401104735.jpg",
+      info_url: "https://www.spacex.com/vehicles/starship/",
+      wiki_url: "https://en.wikipedia.org/wiki/SpaceX_Starship",
+      consecutive_successful_launches: 0,
+      successful_launches: 0,
+      failed_launches: 0,
+      pending_launches: 0,
+    },
+  ],
+  spacecraft_list: [
+    {
+      id: 7,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/spacecraft/7/",
+      name: "Cargo Dragon 2",
+      type: {
+        id: 1,
+        name: "Unknown",
+      },
+      agency: {
+        id: 121,
+        url: "https://lldev.thespacedevs.com/2.2.0/agencies/121/",
+        name: "SpaceX",
+        featured: true,
+        type: "Commercial",
+        country_code: "USA",
+        abbrev: "SpX",
+        description:
+          "Space Exploration Technologies Corp., known as SpaceX, is an American aerospace manufacturer and space transport services company headquartered in Hawthorne, California. It was founded in 2002 by entrepreneur Elon Musk with the goal of reducing space transportation costs and enabling the colonization of Mars. SpaceX has many pads, on the East Coast of the US they own SLC-40 at Cape Canaveral and LC-39A at the Kennedy Space Center for their lower inclination launches. They also own SLC-4E at Vandenberg, California for their high inclination launches. Another site is also being developed at Boca Chica, Texas.",
+        administrator: "CEO: Elon Musk",
+        founding_year: "2002",
+        launchers: "Falcon",
+        spacecraft: "Dragon",
+        parent: null,
+        image_url:
+          "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/agency_images/spacex_image_20190207032501.jpeg",
+      },
+      in_use: false,
+      capability: "Cargo Earth Orbit Logistics",
+      history:
+        "Cargo Dragon 2 is an updated version of the original Dragon spaceship designed to service the International Space Station with first flights conducted in 2020.",
+      details:
+        "Cargo Dragon 2 is a autonomous spaceship capable of bringing science to and from the International Space Station with large pressurized and un-pressurized sections to support a variety of missions.",
+      maiden_flight: "2020-12-06",
+      height: 7.2,
+      diameter: 3.7,
+      human_rated: false,
+      crew_capacity: null,
+      payload_capacity: 6000,
+      flight_life:
+        "Able to fly for up to one week of free flight or two years docked.",
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/orbiter_images/cargo_dragon_2_image_20201124225131.jpeg",
+      nation_url: null,
+      wiki_link: "https://en.wikipedia.org/wiki/Dragon_2",
+      info_link: "https://www.spacex.com/dragon",
+    },
+    {
+      id: 6,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/spacecraft/6/",
+      name: "Crew Dragon 2",
+      type: {
+        id: 1,
+        name: "Unknown",
+      },
+      agency: {
+        id: 121,
+        url: "https://lldev.thespacedevs.com/2.2.0/agencies/121/",
+        name: "SpaceX",
+        featured: true,
+        type: "Commercial",
+        country_code: "USA",
+        abbrev: "SpX",
+        description:
+          "Space Exploration Technologies Corp., known as SpaceX, is an American aerospace manufacturer and space transport services company headquartered in Hawthorne, California. It was founded in 2002 by entrepreneur Elon Musk with the goal of reducing space transportation costs and enabling the colonization of Mars. SpaceX has many pads, on the East Coast of the US they own SLC-40 at Cape Canaveral and LC-39A at the Kennedy Space Center for their lower inclination launches. They also own SLC-4E at Vandenberg, California for their high inclination launches. Another site is also being developed at Boca Chica, Texas.",
+        administrator: "CEO: Elon Musk",
+        founding_year: "2002",
+        launchers: "Falcon",
+        spacecraft: "Dragon",
+        parent: null,
+        image_url:
+          "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/agency_images/spacex_image_20190207032501.jpeg",
+      },
+      in_use: true,
+      capability: "Crew Flights to ISS",
+      history:
+        "Crew Dragon 2 is a spacecraft developed by SpaceX, an American private space transportation company based in Hawthorne, California. Dragon is launched into space by the SpaceX Falcon 9 two-stage-to-orbit launch vehicle. It is one of two American Spacecraft being develeoped capable of lifting American Astronauts to the International Space Station.",
+      details:
+        "Crew Dragon 2 is capable of lifting four astronauts, or a combination of crew and cargo to and from low Earth orbit. Its heat shield is designed to withstand Earth re-entry velocities from Lunar and Martian spaceflights.",
+      maiden_flight: "2019-03-02",
+      height: 7.2,
+      diameter: 3.7,
+      human_rated: true,
+      crew_capacity: 4,
+      payload_capacity: 6000,
+      flight_life:
+        "Able to fly for up to one week of free flight or two years docked.",
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/orbiter_images/crew2520dragon25202_image_20200117151409.jpeg",
+      nation_url: null,
+      wiki_link: "https://en.wikipedia.org/wiki/Dragon_2",
+      info_link: "https://www.spacex.com/crew-dragon",
+    },
+    {
+      id: 3,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/spacecraft/3/",
+      name: "Dragon 1",
+      type: {
+        id: 1,
+        name: "Unknown",
+      },
+      agency: {
+        id: 121,
+        url: "https://lldev.thespacedevs.com/2.2.0/agencies/121/",
+        name: "SpaceX",
+        featured: true,
+        type: "Commercial",
+        country_code: "USA",
+        abbrev: "SpX",
+        description:
+          "Space Exploration Technologies Corp., known as SpaceX, is an American aerospace manufacturer and space transport services company headquartered in Hawthorne, California. It was founded in 2002 by entrepreneur Elon Musk with the goal of reducing space transportation costs and enabling the colonization of Mars. SpaceX has many pads, on the East Coast of the US they own SLC-40 at Cape Canaveral and LC-39A at the Kennedy Space Center for their lower inclination launches. They also own SLC-4E at Vandenberg, California for their high inclination launches. Another site is also being developed at Boca Chica, Texas.",
+        administrator: "CEO: Elon Musk",
+        founding_year: "2002",
+        launchers: "Falcon",
+        spacecraft: "Dragon",
+        parent: null,
+        image_url:
+          "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/agency_images/spacex_image_20190207032501.jpeg",
+      },
+      in_use: true,
+      capability: "ISS Logistics",
+      history:
+        "Dragon is a spacecraft developed by SpaceX, an American private space transportation company based in Hawthorne, California. Dragon is launched into space by the SpaceX Falcon 9 two-stage-to-orbit launch vehicle, and SpaceX is developing a crewed version called the Dragon V2.",
+      details:
+        "SpaceX is additionally developing a crewed variant of the Dragon called Dragon V2. Dragon V2 will be able to carry up to seven astronauts, or some combination of crew and cargo, to and from low Earth orbit. The V2 heat shield is designed to withstand Earth re-entry velocities from Lunar and Martian spaceflights.",
+      maiden_flight: "2010-12-08",
+      height: 6.1,
+      diameter: 3.7,
+      human_rated: false,
+      crew_capacity: null,
+      payload_capacity: 4200,
+      flight_life:
+        "One week free flight, up to two years while docked to the International Space Station.",
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/orbiter_images/dragon25201_image_20190207032515.jpeg",
+      nation_url: null,
+      wiki_link: "https://en.wikipedia.org/wiki/Dragon_(spacecraft)",
+      info_link: "https://www.spacex.com/dragon",
+    },
+    {
+      id: 20,
+      url: "https://lldev.thespacedevs.com/2.2.0/config/spacecraft/20/",
+      name: "Tesla Roadster",
+      type: {
+        id: 1,
+        name: "Unknown",
+      },
+      agency: {
+        id: 121,
+        url: "https://lldev.thespacedevs.com/2.2.0/agencies/121/",
+        name: "SpaceX",
+        featured: true,
+        type: "Commercial",
+        country_code: "USA",
+        abbrev: "SpX",
+        description:
+          "Space Exploration Technologies Corp., known as SpaceX, is an American aerospace manufacturer and space transport services company headquartered in Hawthorne, California. It was founded in 2002 by entrepreneur Elon Musk with the goal of reducing space transportation costs and enabling the colonization of Mars. SpaceX has many pads, on the East Coast of the US they own SLC-40 at Cape Canaveral and LC-39A at the Kennedy Space Center for their lower inclination launches. They also own SLC-4E at Vandenberg, California for their high inclination launches. Another site is also being developed at Boca Chica, Texas.",
+        administrator: "CEO: Elon Musk",
+        founding_year: "2002",
+        launchers: "Falcon",
+        spacecraft: "Dragon",
+        parent: null,
+        image_url:
+          "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/agency_images/spacex_image_20190207032501.jpeg",
+      },
+      in_use: true,
+      capability: "A car in space.",
+      history:
+        "Elon Musk's Tesla Roadster is an electric sports car that served as the dummy payload for the February 2018 Falcon Heavy test flight and became an artificial satellite of the Sun. \"Starman\", a mannequin dressed in a spacesuit, occupies the driver's seat. The car and rocket are products of Tesla and SpaceX, respectively, both companies founded by Elon Musk. The 2008-model Roadster was previously used by Musk for commuting to work, and is the only production car in space.",
+      details:
+        "The car, mounted on the rocket's second stage, acquired enough velocity to escape Earth's gravity and enter an elliptical heliocentric orbit crossing the orbit of Mars. The orbit reaches a maximum distance from the Sun at aphelion of 1.66 astronomical units (au). During the early portion of the voyage outside the Earth's atmosphere, live video was transmitted back to the mission control center and live-streamed for slightly over four hours.",
+      maiden_flight: "2018-02-06",
+      height: 4,
+      diameter: 1.8,
+      human_rated: false,
+      crew_capacity: 2,
+      payload_capacity: null,
+      flight_life:
+        "It is now on an heliocentric orbit with no planned return to Earth.",
+      image_url:
+        "https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/orbiter_images/tesla2520roadster_image_20190307220553.jpg",
+      nation_url: null,
+      wiki_link: "https://en.wikipedia.org/wiki/Elon_Musk%27s_Tesla_Roadster",
+      info_link: "",
+    },
+  ],
 };
 
-// FUNCTION THAT TELLS HOW TO STORE DATA (WILL BE PASSED INTO LOCALSTORAGE AFTER CALLING THIS FUNCTION )
-const storeData = (recipe, pushedTo, ingredients, preparation) => {
-  let recipeObject = {};
-  recipeObject["id"] = recipe.id;
-  recipeObject["title"] = recipe.title;
-  recipeObject["image"] = recipe.image;
-  recipeObject["vegan"] = recipe.vegan;
-  recipeObject["vegetarian"] = recipe.vegetarian;
-  recipeObject["glutenFree"] = recipe.glutenFree;
-  recipeObject["dairyFree"] = recipe.dairyFree;
-  recipeObject["veryHealthy"] = recipe.veryHealthy;
-  recipeObject["sourceUrl"] = recipe.sourceUrl;
-  ingredients && ingredients.length > 0
-    ? (recipeObject["ingredients"] = [...ingredients])
-    : (recipeObject["ingredients"] = null);
-  preparation && preparation.length > 0
-    ? (recipeObject["preparation"] = [...preparation])
-    : (recipeObject["preparation"] = null);
-  pushedTo.push(recipeObject);
-};
-
-let searchedRecipes = [];
-// ADD NEW RECIPES FUNCTIONS
-const addNewRecipes = async () => {
-  searchedRecipes = [];
-  // GETTING DATA FROM API (CALLING THE FUNCTION)
-  const recipesFromApi = await fetchRecipes();
-
-  if (recipesFromApi.length > 0) {
-    const noRecipesFound = document.getElementById("noRecipesFound");
-    noRecipesFound.classList.add("no-recipes-hidden");
-  }
-
-  // 1. STORE INGREDIENTS INFO into an array so that it can be filtered
-  recipesFromApi.forEach((recipe) => {
-    let ingredients = [];
-    let preparation = [];
-    if (recipe.analyzedInstructions.length > 0) {
-      const steps = recipe.analyzedInstructions[0].steps;
-      steps.forEach((step) => {
-        let ingredientsList = step.ingredients;
-        let stepsList = step.step;
-        preparation.push(stepsList);
-        ingredientsList.forEach((ing) => {
-          ingredients.push(ing.name);
-        });
-      });
-    }
-    // Storing the searched recipes in the array 'searchedRecipes'
-    storeData(recipe, searchedRecipes, ingredients, preparation);
-  });
-
-  // 2.
-  // MAKE ELEMENTS BY DOM with searchedRecipes Data from localStorage
-  createCards(searchedRecipes);
-  addEvents(searchedRecipes);
-  keepCheckboxes();
-  filteringRecipes(searchedRecipes);
-  // removeDeletedCards();
-};
-
-const newRecipesBtn = document.getElementById("newRecipes");
-// CLICKING THE BUTTON AND CALLING THE FUNC ABOVE(addNewRecipes)
-newRecipesBtn.addEventListener("click", () => {
-  addNewRecipes();
-});
-
-// *************** FILTERING *************************//
-
-const addEvents = (recipesData) => {
-  // VEGETARIAN VEGAN DROPDOWN
-  // Every time the dropdown is selected, the filtering function is called
-  document.getElementById("vegeVegan").addEventListener("change", () => {
-    filteringRecipes(recipesData);
-  });
-
-  // READING CHECKBOXES
-  // Every time any checkbox is checked or unchecked, the filtering function is called
-  document.querySelectorAll("input[name=checkbox]").forEach((x) => {
-    x.addEventListener("change", () => {
-      filteringRecipes(recipesData);
-    });
-  });
-};
-
-// FILTERING
-// Listening all the values that have to filter with, and calling createCards function with the filtered recipes
-const filteringRecipes = (recipes) => {
-  let checkedValue = [];
-  // CREATING ARRAY OF CHECKBOXES' VALUE
-  const checkedBoxes = Array.from(
-    document.querySelectorAll("input[name=checkbox]:checked")
-  );
-  checkedBoxes.map((x) => checkedValue.push(x.value));
-  // CREATING VEGE VEGAN VARIABLE
-  const vegeVegan = document.getElementById("vegeVegan").value;
-  // WHEN THE VEGETARIAN OR VEGAN IS CHOSEN, PUSH THE VALUE INTO THE CHECKEDvALUE
-  // SO THAT CHECKED VALUE ARRAY CAN HAVE ALL THE VALUE THAT NEEDS TO BE CHECKED AND FILTER THE ORIGINAL RECIPE ARRAY
-  if (vegeVegan === "vegetarian" || vegeVegan === "vegan") {
-    checkedValue.push(vegeVegan);
-  }
-
-  localStorage.setItem("checkedValue", JSON.stringify(checkedValue));
-
-  // FILTERING RECIPES; CREATING CARDS
-  // This filteredRecipes are updated each time of forEach loop
-  let filteredRecipes = [...recipes];
-  // If nothing is checked (everthing is unchecked), just create cards with the original data
-  console.log(checkedValue);
-  if (checkedValue.length === 0) {
-    createCards(recipes);
-  } else {
-    checkedValue.forEach((value) => {
-      filteredRecipes = filteredRecipes.filter((recipe) => {
-        return recipe[value];
-      });
-      console.log(filteredRecipes);
-    });
-    createCards(filteredRecipes);
-  }
-
-  // If there are no recipes after filtering, show the picture with no recipes found
-  const noRecipesFound = document.getElementById("noRecipesFound");
-  if (checkedValue.length > 0 && filteredRecipes.length === 0) {
-    noRecipesFound.classList.remove("no-recipes-hidden");
-  } else {
-    noRecipesFound.classList.add("no-recipes-hidden");
-  }
-};
-
-// get localstorage value of checkboxes and checked the checkboxes & filter along the values
-const keepCheckboxes = () => {
-  let checkedValue = localStorage.getItem("checkedValue")
-    ? JSON.parse(localStorage.getItem("checkedValue"))
-    : [];
-  console.log(checkedValue);
-  checkedValue.forEach((value) => {
-    if (
-      value === "glutenFree" ||
-      value === "dairyFree" ||
-      value === "veryHealthy"
-    ) {
-      document.getElementById(value).checked = true;
-    } else {
-      const optionAll = document.getElementById("all");
-      console.log(optionAll.selected);
-      optionAll.setAttribute("selected", false);
-      console.log(optionAll.selected);
-      // optionAll.classList.remove('selected');
-      // optionAll.removeAttribute('disabled');
-      const selectedValue = document.getElementById(value);
-
-      selectedValue.setAttribute("selected", true);
-      // selectedValue.classList.add('selected');
-      console.log("vegan or vege is checked");
-
-      // document.getElementById(value).setAttribute('disabled', true);
-    }
-  });
-};
-
-//***********************/ FILTERING END **************************//
-//Showing recipes when loading page
-addNewRecipes();
-
-// MATERIALIZE///////////
-// SIDE NAV
-const options = {};
-document.addEventListener("DOMContentLoaded", function () {
-  const elems = document.querySelectorAll(".sidenav");
-  const instances = M.Sidenav.init(elems, options);
-});
-
-// FILTER INIT
-// document.addEventListener('DOMContentLoaded', function () {
-//   const elems = document.querySelectorAll('select');
-//   const instances = M.FormSelect.init(elems, options);
-// });
-
-// PARALLAX
-document.addEventListener("DOMContentLoaded", function () {
-  const elems = document.querySelectorAll(".parallax");
-  const instances = M.Parallax.init(elems, options);
-});
-
-// CAROUSEL
-document.addEventListener("DOMContentLoaded", function () {
-  var elems = document.querySelectorAll(".carousel");
-  var instance = M.Carousel.init(elems, options);
-});
+var test = "hello";

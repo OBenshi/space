@@ -8,6 +8,7 @@
 // agencySelector.addEventListener('change', zzz);
 // console.log(filters, 'from test')
 
+console.log(test);
 const moshe = {
   count: 174,
   next:
