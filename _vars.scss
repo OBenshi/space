@@ -1,21 +1,19 @@
-/* CSS HEX */
-/* --black: #000000ff;
---oxford-blue: #14213dff;
---orange-web: #fca311ff;
---platinum: #e5e5e5ff;
---white: #ffffffff; 
-  color: chartreuse;*/
+$ega16-blue: #0000aa;
+$ega16-green: #00aa00;
+$ega16-bright-green: #55ff55;
+$ega64-bright-green: #55ff00;
+$ega-blue: #0000ff;
+$ega-bright-pink: #ff00ff;
 $dos-red: #aa0000;
+$b386-blue: #000084;
 $dark-nav: #555555;
 $title-color: black;
-$accent-color: #55ff55;
+$accent-color: $ega64-bright-green;
 $txt-color: #ffffff;
-$body-color: #000084;
+$body-color: $ega16-blue;
 $brand-color: #aa0000;
 $nav-color: #bbbbbb;
 $txt-on-gray: black;
 $h2Back: #00aaaa;
 $purp: #aa00aa;
 $card-border-color: $dark-nav;
-// FF00FF
-// AAAAAA

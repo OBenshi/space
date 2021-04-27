@@ -10,6 +10,7 @@ const addLaunchs = (max = 1000) => {
   limit = max;
   fetch(
     `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
+    // `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
   )
     .then((res) => {
       return res.json();
@@ -30,6 +31,21 @@ const addLaunchs = (max = 1000) => {
 if (document.title === "UPCOMING LAUNCHES") {
   addLaunchs();
 }
+
+const addAgency = (agencyId) => {
+  fetch(`https://lldev.thespacedevs.com/2.2.0/agencies/${agencyId}/`)
+    .then((res) => {
+      return res.json();
+    })
+    .catch((e) => {})
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((e) => {
+      console.log("we do not have data", e);
+      document.body.append("fuck my life");
+    });
+};
 
 // load more on scroll function
 
@@ -146,13 +162,14 @@ const displayLaunch = (launches) => {
   const launchesDiv = document.getElementById("launchesDiv");
   launchesDiv.innerHTML = "";
   launches.forEach((launch) => {
-    launchNameShort = launch.name.replace(/\s+/g, "");
-    launchNameShort = launchNameShort.replace("|", "-");
-    console.log(launch.name);
-    console.log(launchNameShort);
+    launchNameShort = makeHtmlId(launch.name);
+    // launch.name.replace(/\s+/g, "");
+    // launchNameShort = launchNameShort.replace("|", "-");
+    // console.log(launch.name);
+    // console.log(launchNameShort);
     card = document.createElement("div");
     card.setAttribute("id", `${launchNameShort}-card`);
-    cardClasses = ["card", "aLaunch", "mt-3", "pt-0", "mb-3", "pb-3"];
+    cardClasses = ["card", "aLaunch", "m-5", "pt-0", "pb-0"];
     // card.classList.add("aLaunch");
     // card.classList.add("mt-3");
     // card.classList.add("pt-0");
@@ -177,18 +194,25 @@ const displayLaunch = (launches) => {
     launchCardContent.append(aLaunchSum);
 
     let aLaunchAgency = makeTab(launchNameShort, "agency");
-    // aLaunchAgency.classList.add("show");
-    agencyCard = makeAgency(launch);
-    aLaunchAgency.append(agencyCard);
+    // agencyCard = makeAgency(launch);
+    // aLaunchAgency.append(agencyCard);
     launchCardContent.append(aLaunchAgency);
+
+    let aLaunchLocation = makeTab(launchNameShort, "location");
+    locationCard = makeLocation(launch);
+    aLaunchLocation.append(locationCard);
+    launchCardContent.append(aLaunchLocation);
 
     cardBody.append(launchCardContent);
 
     cardHead = document.createElement("div");
     cardHead.setAttribute("id", `${launchNameShort}-card-head`);
     cardHead.classList.add("card-header");
-    cardHeadParts = giveHead(launchNameShort, ["summary", "agency"]);
-    // console.log(launch.name);
+    cardHeadParts = giveHead(
+      launchNameShort,
+      ["summary", "agency", "location"],
+      launch.launch_service_provider.id
+    );
     cardHead.append(...cardHeadParts);
 
     card.append(cardHead);
@@ -198,7 +222,7 @@ const displayLaunch = (launches) => {
   });
 };
 
-const giveHead = (launchName, parts) => {
+const giveHead = (launchName, parts, agencyId) => {
   cardLinks = document.createElement("div");
   tabs = document.createElement("ul");
   // ul class="nav nav-pills card-header-tabs" id="${launch.name}-tab" role="tablist"
@@ -206,7 +230,7 @@ const giveHead = (launchName, parts) => {
   tabs.classList.add(...ulClassesi);
   tabs.setAttribute("id", `${launchName}-linkList`);
   tabs.setAttribute("role", "tablist");
-  items = makeItems(launchName, parts);
+  items = makeItems(launchName, parts, agencyId);
   tabs.append(...items);
   cardLinks.append(tabs);
 
@@ -216,9 +240,10 @@ const giveHead = (launchName, parts) => {
   return [cardLinks, cardTitle];
 };
 
-const makeItems = (launchName, parts) => {
+const makeItems = (launchName, parts, agencyId) => {
   let items = [];
   parts.forEach((part) => {
+    console.log(agencyId);
     li = document.createElement("li");
     li.classList.add("nav-item");
     li.setAttribute("role", "presentation");
@@ -227,6 +252,7 @@ const makeItems = (launchName, parts) => {
     if (part == "summary") {
       linki.classList.add("active");
     }
+    linki.addEventListener("click", addAgency(agencyId));
     linki.setAttribute("id", `${launchName}-${part}-tab`);
     linki.setAttribute("data-toggle", "pill");
     linki.setAttribute("href", `#${launchName}-${part}`);
@@ -334,10 +360,16 @@ const makeInfo = (launch) => {
   return [infoDiv, picDiv];
 };
 
-const makeAgency = (launch) => {
-  bob = document.createElement("p");
-  bob.innerHTML = "dfsjlkdfj";
-  return bob;
+const makeContentShell = (launch, contentType) => {
+  let agencyTabContent = document.createElement("div");
+  agencyTabContent.setAttribute("id", `${makeHtmlId(launch.name)}`);
+  return agencyTabContent;
+};
+
+const makeLocation = (launch) => {
+  tom = document.createElement("p");
+  tom.innerText = "12334";
+  return tom;
 };
 
 //  removing doubles function
@@ -350,6 +382,12 @@ const removeDuble = (toClean) => {
     }
   });
   return cleaned;
+};
+
+const makeHtmlId = (launchName) => {
+  launchName.replace(/\s+/g, "");
+  launchName.replace("|", "-");
+  return launchName;
 };
 
 const filterData = (launches) => {

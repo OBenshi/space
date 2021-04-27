@@ -1,10 +1,7 @@
-/* CSS HEX */
-/* --black: #000000ff;
---oxford-blue: #14213dff;
---orange-web: #fca311ff;
---platinum: #e5e5e5ff;
---white: #ffffffff; 
-  color: chartreuse;*/
+body {
+  background-color: #0000aa;
+}
+
 h5 {
   color: black;
   line-height: 5rem;
@@ -32,11 +29,11 @@ h5 {
   color: #aa0000;
 }
 #mainNav .navbar-brand span {
-  color: #55ff55;
+  color: #55ff00;
 }
 
 #headingGroup span {
-  color: #55ff55;
+  color: #55ff00;
 }
 #headingGroup h2 {
   font-size: 3rem;
@@ -65,7 +62,7 @@ h5 {
 }
 .blurb p .dots {
   display: inline;
-  color: #55ff55;
+  color: #55ff00;
   cursor: pointer;
   vertical-align: sub;
   font-style: italic;
@@ -76,7 +73,7 @@ h5 {
 .blurb p .less {
   display: none;
   cursor: pointer;
-  color: #55ff55;
+  color: #55ff00;
   vertical-align: sub;
   font-style: italic;
 }
@@ -136,7 +133,7 @@ select.form-control {
 .aLaunch .card-header {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   align-content: center;
   justify-content: space-between;
   align-items: center;
@@ -198,25 +195,25 @@ select.form-control {
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
   background-image: none !important;
-  background-color: #000084;
+  background-color: #0000aa;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
   background-image: none !important;
-  background-color: #000084;
+  background-color: #0000aa;
 }
 
 .custom-checkbox .custom-control-label::before {
   border-radius: 0rem;
   border: none;
-  background-color: #000084;
+  background-color: #0000aa;
 }
 
 .custom-checkbox .custom-control-input:focus {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
-  background-color: #000084;
+  background-color: #0000aa;
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
@@ -228,7 +225,7 @@ select.form-control {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
-  background-color: #000084;
+  background-color: #0000aa;
 }
 
 .form-control:active {
