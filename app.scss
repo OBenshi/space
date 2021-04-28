@@ -10,6 +10,15 @@ h5 {
   line-height: 5rem;
   font-size: 3rem;
 }
+iframe{
+  height: 100%;
+  width: 100%;
+  @media only screen and (max-width: 768px) {
+    height: 100%;
+    width: 100%;
+  }
+
+}
 .pic {
   border: 3px solid $nav-color;
 }

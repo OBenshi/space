@@ -206,7 +206,7 @@ const displayLaunch = (launches) => {
 
     let aLaunchLocation = makeTab(launchNameShort, "location");
     locationCard = makeLocation(launch.pad);
-    // aLaunchLocation.append(locationCard);
+    aLaunchLocation.append(locationCard);
     launchCardContent.append(aLaunchLocation);
 
     cardBody.append(launchCardContent);
@@ -247,7 +247,7 @@ const giveHead = (launchName, launchNameShort, parts, agencyId) => {
   return [cardLinks, cardTitle];
 };
 
-const makeItems = (launchName, parts, agencyId) => {
+const makeItems = (launchName, parts, agencyId = null) => {
   let items = [];
   parts.forEach((part) => {
     // console.log(agencyId);
@@ -441,7 +441,7 @@ const makeAgency = (agency, shell) => {
   shell.append(infoDiv);
 };
 
-const makeLocation = (launch) => {
+const makeLocation = (location) => {
   picDiv = document.createElement("div");
   const divClasses = ["col-12", "col-md-6"];
   picDiv.classList.add(...divClasses);
@@ -450,61 +450,56 @@ const makeLocation = (launch) => {
   locationPic = document.createElement("img");
   const imgClasses = ["img-fluid", "pic", "d-flex"];
   locationPic.classList.add(...imgClasses);
-  if (agency.logo_url && agency.logo_url != null) {
-    agencyPic.src = agency.logo_url;
-  } else {
-    agencyPic.src =
-      "imgs/DFRC_mission_control_during_X-29_test_flight_(EC89-0300-1).jpeg";
-  }
-  // let testing = document.createElement("p");
-  // testing.innerText = "testing 123";
-  picDiv.append(agencyPic);
+  locationPic.src = location.map_image;
+  locationPicLink = document.createElement("a");
+  locationPicLink.setAttribute("href", `${location.map_url}`);
+  locationPicLink.append(locationPic);
 
-  // creates info div
+  picDiv.append(locationPicLink);
 
-  infoDiv = document.createElement("div");
-  infoDiv.classList.add(...divClasses);
-  infoDiv.classList.add("launchBlurb");
-  // infoDiv.classList.add('jumbotron')
+  // // creates info div
 
-  // adds title  to info
-  agencyName = document.createElement("h2");
-  agencyName.innerText = agency.name;
-  infoDiv.append(agencyName);
+  // infoDiv = document.createElement("div");
+  // infoDiv.classList.add(...divClasses);
+  // infoDiv.classList.add("launchBlurb");
+  // // infoDiv.classList.add('jumbotron')
 
-  abbv = document.createElement("p");
-  abbv.innerText = `agency abbreviation: ${agency.abbrev}`;
-  infoDiv.append(abbv);
+  // // adds title  to info
+  // agencyName = document.createElement("h2");
+  // agencyName.innerText = agency.name;
+  // infoDiv.append(agencyName);
 
-  if (agency.country_code != null) {
-    agencyCountry = document.createElement("p");
-    agencyCountry.innerText = `country code: ${agency.country_code}`;
-    infoDiv.append(agencyCountry);
-  }
+  // abbv = document.createElement("p");
+  // abbv.innerText = `agency abbreviation: ${agency.abbrev}`;
+  // infoDiv.append(abbv);
 
-  if (agency.type != null) {
-    agencyType = document.createElement("p");
-    agencyType.innerText = `type: ${agency.type}`;
-    infoDiv.append(agencyType);
-  }
+  // if (agency.country_code != null) {
+  //   agencyCountry = document.createElement("p");
+  //   agencyCountry.innerText = `country code: ${agency.country_code}`;
+  //   infoDiv.append(agencyCountry);
+  // }
 
-  if (agency.founding_year && agency.founding_year != null) {
-    agencyBday = document.createElement("p");
-    agencyBday.innerText = `founding year: ${agency.founding_year}`;
-    infoDiv.append(agencyBday);
-  }
+  // if (agency.type != null) {
+  //   agencyType = document.createElement("p");
+  //   agencyType.innerText = `type: ${agency.type}`;
+  //   infoDiv.append(agencyType);
+  // }
 
-  totalLaunches = document.createElement("p");
-  totalLaunches.innerText = `total launch count; ${agency.total_launch_count}`;
-  infoDiv.append(totalLaunches);
+  // if (agency.founding_year && agency.founding_year != null) {
+  //   agencyBday = document.createElement("p");
+  //   agencyBday.innerText = `founding year: ${agency.founding_year}`;
+  //   infoDiv.append(agencyBday);
+  // }
 
-  successfulLaunches = document.createElement("p");
-  successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
-  infoDiv.append(successfulLaunches);
+  // totalLaunches = document.createElement("p");
+  // totalLaunches.innerText = `total launch count; ${agency.total_launch_count}`;
+  // infoDiv.append(totalLaunches);
 
-  shell.innerHTML = "";
-  shell.append(picDiv);
-  shell.append(infoDiv);
+  // successfulLaunches = document.createElement("p");
+  // successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
+  // infoDiv.append(successfulLaunches);
+
+  return picDiv;
 };
 
 //  removing doubles function

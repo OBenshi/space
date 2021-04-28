@@ -9,6 +9,17 @@ h5 {
   font-size: 3rem;
 }
 
+iframe {
+  height: 100%;
+  width: 100%;
+}
+@media only screen and (max-width: 768px) {
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .pic {
   border: 3px solid #bbbbbb;
 }
