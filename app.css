@@ -2,6 +2,10 @@ body {
   background-color: #0000aa;
   margin: 0%;
 }
+body h2 {
+  text-align: center;
+  color: #aa0000 !important;
+}
 
 h5 {
   color: black;
@@ -124,6 +128,23 @@ select.form-control {
   border-style: dotted;
   border-color: #555555;
   border-width: 0.2rem;
+  font-size: 1.5rem;
+}
+.aLaunch .card-body {
+  line-height: 2rem;
+}
+.aLaunch .card-body .text-red {
+  color: red;
+}
+.aLaunch .card-body h2 {
+  color: #aa0000;
+  text-align: center;
+  font-size: 2.2rem;
+}
+.aLaunch .card-body h4 {
+  color: black;
+  text-align: center;
+  font-size: 1.3rem;
 }
 .aLaunch .tab-content {
   border-width: 0.2rem;
@@ -145,7 +166,7 @@ select.form-control {
 .aLaunch .card-header {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   align-content: center;
   justify-content: space-between;
   align-items: center;
@@ -257,6 +278,7 @@ select.form-control {
   font-size: 2rem;
   line-height: 2rem;
   margin-bottom: 1rem;
+  color: #aa0000;
 }
 .launchBlurb p {
   text-align: center;

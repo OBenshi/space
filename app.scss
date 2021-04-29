@@ -4,12 +4,17 @@
 body {
   background-color: $body-color;
   margin: 0%;
-}
+h2{
+  text-align: center;
+  color: $dos-red !important;
+}}
+
 h5 {
   color: black;
   line-height: 5rem;
   font-size: 3rem;
 }
+
 iframe{
   height: 100%;
   width: 100%;
@@ -136,6 +141,25 @@ select.form-control {
   border-style: dotted;
   border-color: $card-border-color;
   border-width: 0.2rem;
+  font-size: 1.5rem;
+  .card-body{line-height: 2rem;
+      .text-red{
+  color:red;
+  
+}
+h2 {
+  color:$dos-red;
+  text-align: center;
+  font-size: 2.2rem;
+}
+h4{
+  color:black;
+  text-align: center;
+  font-size: 1.3rem;
+}
+  }
+
+
 
   .tab-content {
     border-width: 0.2rem;
@@ -163,7 +187,7 @@ select.form-control {
   .card-header {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     align-content: center;
     justify-content: space-between;
     align-items: center;
@@ -282,6 +306,7 @@ select.form-control {
     font-size: 2rem;
     line-height: 2rem;
     margin-bottom: 1rem;
+    color: $dos-red;
   }
   p{
     text-align: center;
@@ -289,3 +314,4 @@ select.form-control {
     margin-bottom: 0.8rem;
   }
 }
+

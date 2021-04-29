@@ -9,8 +9,8 @@ let lowestScrl = 0;
 const addLaunchs = (max = 1000) => {
   limit = max;
   fetch(
-    `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
     // `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
+    `https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
   )
     .then((res) => {
       return res.json();
@@ -147,6 +147,9 @@ const timeCounter = (T, launchName) => {
 
     // Display the result in the element with id="demo"
     if (document.getElementById(`${launchName}-counter`)) {
+      document
+        .getElementById(`${launchName}-counter`)
+        .classList.add("text-red");
       document.getElementById(
         `${launchName}-counter`
       ).innerText = `T- ${days}d ${hours}h ${minutes}m ${seconds}s`;
@@ -206,7 +209,7 @@ const displayLaunch = (launches) => {
 
     let aLaunchLocation = makeTab(launchNameShort, "location");
     locationCard = makeLocation(launch.pad);
-    aLaunchLocation.append(locationCard);
+    aLaunchLocation.append(...locationCard);
     launchCardContent.append(aLaunchLocation);
 
     cardBody.append(launchCardContent);
@@ -244,7 +247,7 @@ const giveHead = (launchName, launchNameShort, parts, agencyId) => {
   cardTitle = document.createElement("div");
   cardTitle.innerHTML = launchName;
 
-  return [cardLinks, cardTitle];
+  return [cardTitle, cardLinks];
 };
 
 const makeItems = (launchName, parts, agencyId = null) => {
@@ -327,17 +330,14 @@ const makeInfo = (launch) => {
   // adds title  to info
   launchName = document.createElement("h2");
   launchName.innerText = launch.name;
-  infoDiv.append(launchName);
 
   launchLocation = document.createElement("p");
   launchLocation.innerText = `from: ${launch.pad.location.name}`;
-  infoDiv.append(launchLocation);
 
   // adds time to info
   launchTime = document.createElement("p");
   displayTime = new Date(launch.net).toTimeString();
   launchTime.innerText = displayTime;
-  infoDiv.append(launchTime);
 
   // adds count down
   timeToLaunch = document.createElement("p");
@@ -345,30 +345,39 @@ const makeInfo = (launch) => {
   if (launch.net && launch.name) {
     timeCounter(launch.net, launch.name);
   }
-  infoDiv.append(timeToLaunch);
 
   // adds description
-  description = document.createElement("p");
-  if (launch.mission.description && launch.mission.description != null) {
-    description.innerText = launch.mission.description;
-  } else {
-    description.innerText = "no launch description";
-  }
-  infoDiv.append(description);
-  // if (description.innerText.length > 160) {
-  //   console.log('long txt')
-  // }
-  launchProvider = document.createElement("p");
-  launchProvider.innerText = `Provider - ${launch.launch_service_provider.name}`;
-  infoDiv.append(launchProvider);
 
-  missionTyp = document.createElement("p");
-  if (launch.mission != 0) {
-    missionTyp.innerText = `Mission Type - ${launch.mission.type}`;
-  } else {
-    missionTyp.innerText = `Mission Type - Other`;
+  if (launch.mission.description && launch.mission.description != null) {
+    description = document.createElement("p");
+    description.innerText = launch.mission.description;
+
+    relavantClasses = ["lead", "my-5", "py-5"];
+    description.classList.add(...relavantClasses);
+
+    // if (description.innerText.length > 160) {
+    //   console.log('long txt')
+    // }
+    launchProvider = document.createElement("p");
+    launchProvider.innerText = `Provider - ${launch.launch_service_provider.name}`;
+    missionTyp = document.createElement("p");
+    if (launch.mission != 0) {
+      missionTyp.innerText = `Mission Type - ${launch.mission.type}`;
+    } else {
+      missionTyp.innerText = `Mission Type - Other`;
+    }
   }
+
+  infoDiv.append(launchName);
+  infoDiv.append(launchTime);
+  infoDiv.append(timeToLaunch);
+  infoDiv.append(launchProvider);
+  infoDiv.append(launchLocation);
   infoDiv.append(missionTyp);
+
+  if (description) {
+    infoDiv.append(description);
+  }
 
   return [picDiv, infoDiv];
 };
@@ -435,6 +444,12 @@ const makeAgency = (agency, shell) => {
   successfulLaunches = document.createElement("p");
   successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
   infoDiv.append(successfulLaunches);
+  if (agency.description && agency.description != null) {
+    agencyDescription = document.createElement("p");
+    agencyDescription.classList.add("lead");
+    agencyDescription.innerText = agency.description;
+    infoDiv.append(agencyDescription);
+  }
 
   shell.innerHTML = "";
   shell.append(picDiv);
@@ -457,17 +472,31 @@ const makeLocation = (location) => {
 
   picDiv.append(locationPicLink);
 
-  // // creates info div
+  // creates info div
 
-  // infoDiv = document.createElement("div");
-  // infoDiv.classList.add(...divClasses);
-  // infoDiv.classList.add("launchBlurb");
+  infoDiv = document.createElement("div");
+  infoDiv.classList.add(...divClasses);
+  infoDiv.classList.add("launchBlurb");
   // // infoDiv.classList.add('jumbotron')
 
-  // // adds title  to info
-  // agencyName = document.createElement("h2");
-  // agencyName.innerText = agency.name;
-  // infoDiv.append(agencyName);
+  // adds title  to info
+  locationName = document.createElement("h2");
+  locationName.innerText = location.location.name;
+  infoDiv.append(locationName);
+  padName = document.createElement("h4");
+  padName.innerText = location.name;
+  infoDiv.append(padName);
+
+  goodLaunch = document.createElement("p");
+  goodLaunch.innerText = `total launch count: ${location.location.total_launch_count}`;
+  infoDiv.append(goodLaunch);
+
+  if (location.wiki_url && location.wiki_url != 0) {
+    wikiLink = document.createElement("a");
+    wikiLink.setAttribute("href", `${location.wikiLink}`);
+    wikiLink.innerText = "Read more on Wikipedia";
+    infoDiv.append(wikiLink);
+  }
 
   // abbv = document.createElement("p");
   // abbv.innerText = `agency abbreviation: ${agency.abbrev}`;
@@ -499,7 +528,7 @@ const makeLocation = (location) => {
   // successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
   // infoDiv.append(successfulLaunches);
 
-  return picDiv;
+  return [picDiv, infoDiv];
 };
 
 //  removing doubles function
