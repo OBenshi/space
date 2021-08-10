@@ -1,12 +1,13 @@
 let start_date = dayjs().format("YYYY-MM-DD");
 let end_date = dayjs(start_date).subtract(5, "day").format("YYYY-MM-DD");
-const apodKey = config.apodKey;
+// const apodKey2 = process.env.TAZ;
 const callNasa = () => {
   console.log(`start date is ${start_date}`);
   console.log(`end date is ${end_date}`);
+  // console.log(`apodKey2`, apodKey2);
   if (start_date !== end_date) {
     fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${config.apodKey}&start_date=${end_date}&end_date=${start_date}`
+      `https://api.nasa.gov/planetary/apod?api_key=${apodKey}&start_date=${end_date}&end_date=${start_date}`
     )
       .then((res) => {
         return res.json();
