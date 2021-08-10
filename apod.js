@@ -7,7 +7,7 @@ const callNasa = () => {
   // console.log(`apodKey2`, apodKey2);
   if (start_date !== end_date) {
     fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${apodKey}&start_date=${end_date}&end_date=${start_date}`
+      `https://api.nasa.gov/planetary/apod?api_key=${APOD_TOKEN}&start_date=${end_date}&end_date=${start_date}`
     )
       .then((res) => {
         return res.json();
