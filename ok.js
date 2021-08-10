@@ -525,3 +525,11 @@ const max = {
 };
 
 var test = "hello";
+
+console.log();
+
+console.log();
+
+console.log();
+7676;
+console.log();

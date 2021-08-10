@@ -42,36 +42,12 @@ const addAgency = (agencyId, divId) => {
       shell = document.getElementById(`${divId.substring(1)}`);
       agencyContent = makeAgency(data, shell);
       console.log(shell);
-      // shell.innerHTML=""
-      // shell.append(...agencyContent)
-      // console.log(document.querySelector(`${divId}`))
     })
     .catch((e) => {
       console.log("we do not have data", e);
       document.body.append("fuck my life");
     });
 };
-
-// load more on scroll function
-
-// function onScroll(event) {
-//   const current = document.documentElement.scrollTop;
-//   const maxHeight = document.body.scrollHeight;
-//   if (current > lowestScrl && current>maxHeight*0.5) {
-//     offset = offset + 10;
-//     addLaunchs();
-//     lowestScrl = current
-//   }//
-// }
-// window.addEventListener('scroll', event => onScroll(event));
-
-/**==============================================
- **              createOptions()
- *?  create Select Options for agency and location ?
- *@param name type
- *@param name type
- *@return type
- *=============================================**/
 
 const createOptions = (launches) => {
   let locations = removeDuble(
@@ -171,19 +147,9 @@ const displayLaunch = (launches) => {
   launchesDiv.innerHTML = "";
   launches.forEach((launch) => {
     launchNameShort = makeHtmlId(launch.name);
-    // console.log(launchNameShort)
-    // launch.name.replace(/\s+/g, "");
-    // launchNameShort = launchNameShort.replace("|", "-");
-    // console.log(launch.name);
-    // console.log(launchNameShort);
     card = document.createElement("div");
     card.setAttribute("id", `${launchNameShort}-card`);
     cardClasses = ["card", "aLaunch", "m-5", "pt-0", "pb-0"];
-    // card.classList.add("aLaunch");
-    // card.classList.add("mt-3");
-    // card.classList.add("pt-0");
-    // card.classList.add("mt-3");
-    // card.classList.add("pt-0");
     card.classList.add(...cardClasses);
 
     cardBody = document.createElement("div");
@@ -203,8 +169,6 @@ const displayLaunch = (launches) => {
     launchCardContent.append(aLaunchSum);
 
     let aLaunchAgency = makeTab(launchNameShort, "agency");
-    // agencyCard = makeAgency(launch);
-    // aLaunchAgency.append(agencyCard);
     launchCardContent.append(aLaunchAgency);
 
     let aLaunchLocation = makeTab(launchNameShort, "location");
@@ -235,7 +199,6 @@ const displayLaunch = (launches) => {
 const giveHead = (launchName, launchNameShort, parts, agencyId) => {
   cardLinks = document.createElement("div");
   tabs = document.createElement("ul");
-  // ul class="nav nav-pills card-header-tabs" id="${launch.name}-tab" role="tablist"
   const ulClassesi = ["nav", "nav-pills", "card-header-tabs"];
   tabs.classList.add(...ulClassesi);
   tabs.setAttribute("id", `${launchNameShort}-linkList`);
@@ -292,12 +255,7 @@ const makeTab = (launchName, tab) => {
   someLaunchDiv.setAttribute("id", `${launchName}-${tab}`);
   someLaunchDiv.setAttribute("role", "tabpanel");
   someLaunchDiv.setAttribute("aria-labelledby", `${launchName}-${tab}-tab`);
-  const sectionClasses = [
-    "tab-pane",
-    // "align-items-center",
-    "fade",
-    "flex-wrap",
-  ];
+  const sectionClasses = ["tab-pane", "fade", "flex-wrap"];
   someLaunchDiv.classList.add(...sectionClasses);
   return someLaunchDiv;
 };
@@ -399,8 +357,6 @@ const makeAgency = (agency, shell) => {
     agencyPic.src =
       "imgs/DFRC_mission_control_during_X-29_test_flight_(EC89-0300-1).jpeg";
   }
-  // let testing = document.createElement("p");
-  // testing.innerText = "testing 123";
   picDiv.append(agencyPic);
 
   // creates info div
@@ -408,7 +364,6 @@ const makeAgency = (agency, shell) => {
   infoDiv = document.createElement("div");
   infoDiv.classList.add(...divClasses);
   infoDiv.classList.add("launchBlurb");
-  // infoDiv.classList.add('jumbotron')
 
   // adds title  to info
   agencyName = document.createElement("h2");
@@ -498,36 +453,6 @@ const makeLocation = (location) => {
     infoDiv.append(wikiLink);
   }
 
-  // abbv = document.createElement("p");
-  // abbv.innerText = `agency abbreviation: ${agency.abbrev}`;
-  // infoDiv.append(abbv);
-
-  // if (agency.country_code != null) {
-  //   agencyCountry = document.createElement("p");
-  //   agencyCountry.innerText = `country code: ${agency.country_code}`;
-  //   infoDiv.append(agencyCountry);
-  // }
-
-  // if (agency.type != null) {
-  //   agencyType = document.createElement("p");
-  //   agencyType.innerText = `type: ${agency.type}`;
-  //   infoDiv.append(agencyType);
-  // }
-
-  // if (agency.founding_year && agency.founding_year != null) {
-  //   agencyBday = document.createElement("p");
-  //   agencyBday.innerText = `founding year: ${agency.founding_year}`;
-  //   infoDiv.append(agencyBday);
-  // }
-
-  // totalLaunches = document.createElement("p");
-  // totalLaunches.innerText = `total launch count; ${agency.total_launch_count}`;
-  // infoDiv.append(totalLaunches);
-
-  // successfulLaunches = document.createElement("p");
-  // successfulLaunches.innerText = `successful launches: ${agency.successful_launches}`;
-  // infoDiv.append(successfulLaunches);
-
   return [picDiv, infoDiv];
 };
 
@@ -611,3 +536,4 @@ const noResults = () => {
   nonFound.innerHTML = "NO LAUNCHES MATCH YOUR SEARCH...";
   launchesDiv.append(nonFound);
 };
+console.log(noResults);

@@ -1,21 +1,10 @@
-let start_date = dayjs().subtract(1, "day").format("YYYY-MM-DD");
+let start_date = dayjs().format("YYYY-MM-DD");
 let end_date = dayjs(start_date).subtract(5, "day").format("YYYY-MM-DD");
-// console.log(`a is ${a.format()} and b is ${b.format()}`);
 
-// let start_date = moment().format("YYYY-MM-DD");
-// api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2017-07-08&end_date=2017-07-10
-// let end_date = new Date(start_date);
-// end_date.setDate(end_date.getDate() - 5); //end_date is now 8 days in the future
-// console.log(`myFuture date is ${end_date.toISOString().slice(0, 10)}`);
-// console.log(`start_date is ${start_date}`);
-// 'and end_date
-//api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2021-04-28&end_date=2021-05-06
 const callNasa = () => {
+  console.log(`start date is ${start_date}`);
+  console.log(`end date is ${end_date}`);
   if (start_date !== end_date) {
-    // start_date = dayjs(end_date).format("YYYY-MM-DD");
-    // end_date = dayjs(end_date).subtract(8, "day").format("YYYY-MM-DD");
-    // console.log(`START: STARTstart date is ${start_date}`);
-    // console.log(`START:END date is ${end_date}`);
     fetch(
       `https://api.nasa.gov/planetary/apod?api_key=${apodKey}&start_date=${end_date}&end_date=${start_date}`
     )
@@ -29,24 +18,16 @@ const callNasa = () => {
         console.log(data);
         document.getElementById("loadingPods").style.display = "none";
 
-        // start_date = moment(end_date).format("YYYY-MM-DD");
-        // end_date = moment(end_date).subtract(8, "day").format("YYYY-MM-DD");
         displayAPod(data);
-        // console.log(`END:START date is ${start_date}`);
-        // console.log(`END:END date is ${end_date}`);
       })
       .catch((e) => {
         console.log("we do not have data", e);
         document.body.append("fuck my life");
       });
   }
-  start_date = dayjs(end_date).format("YYYY-MM-DD");
-  end_date = dayjs(end_date).subtract(5, "day").format("YYYY-MM-DD");
+  start_date = dayjs(end_date).subtract(1, "day").format("YYYY-MM-DD");
+  end_date = dayjs(start_date).subtract(5, "day").format("YYYY-MM-DD");
 };
-
-// document.getElementById("hhh").addEventListener("click", () => {
-//   callNasa();
-// });
 
 callNasa();
 
@@ -62,10 +43,10 @@ const onScroll = (event) => {
   } //
 };
 window.addEventListener("scroll", (event) => onScroll(event));
-
+let i = 1;
 const displayAPod = (pods) => {
   const podsDiv = document.getElementById("podsDiv");
-  let i = 1;
+
   // podsDiv.innerHTML = "";
   pods.reverse().forEach((pod) => {
     if (pod.media_type == "image") {
@@ -87,7 +68,7 @@ const displayAPod = (pods) => {
         relvantClasses = [
           "col-md-6",
           "embed-responsive",
-          "order-2",
+          "order-1",
           "order-md-1",
         ];
       }
@@ -131,10 +112,10 @@ const displayAPod = (pods) => {
       innerXplainDiv = document.createElement("div");
       relvantClassesInner = ["col-9", "blurb", "lead"];
       innerXplainDiv.classList.add(...relvantClassesInner);
-      innerXplainDiv.innerHTML = `<h2>${pod.title}</h2><p>${pod.explanation}</p>`;
+      innerXplainDiv.innerHTML = `<h2 class="my-3">${pod.title}</h2><p>${pod.explanation}</p>`;
       xplainDiv.append(innerXplainDiv);
 
-      if (i % 2 != 0) {
+      if (i % 2 == 0) {
         aPodDiv.append(aPodPicDiv);
         aPodDiv.append(xplainDiv);
       } else {
