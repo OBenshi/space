@@ -286,4 +286,15 @@ select.form-control {
   margin-bottom: 0.8rem;
 }
 
+#apodLogo {
+  background-image: url("imgs/jake-weirick-Q_RBVFFXR_g-unsplash.jpg");
+  background-color: #cccccc;
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
+}
+
 /*# sourceMappingURL=app.css.map */
