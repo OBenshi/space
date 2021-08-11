@@ -2,8 +2,8 @@ let start_date = dayjs().format("YYYY-MM-DD");
 let end_date = dayjs(start_date).subtract(5, "day").format("YYYY-MM-DD");
 // const apodKey2 = process.env.TAZ;
 const callNasa = () => {
-  console.log(`start date is ${start_date}`);
-  console.log(`end date is ${end_date}`);
+  // console.log(`start date is ${start_date}`);
+  // console.log(`end date is ${end_date}`);
   // console.log(`apodKey2`, apodKey2);
   if (start_date !== end_date) {
     fetch(
@@ -23,14 +23,15 @@ const callNasa = () => {
       })
       .catch((e) => {
         console.log("we do not have data", e);
-        document.body.append("fuck my life");
+        // document.body.append("fuck my life");
       });
   }
   start_date = dayjs(end_date).subtract(1, "day").format("YYYY-MM-DD");
   end_date = dayjs(start_date).subtract(5, "day").format("YYYY-MM-DD");
 };
-
-callNasa();
+if (document.title === "PICTURE OF THE DAY") {
+  callNasa();
+}
 
 // load more on scroll function
 

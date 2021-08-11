@@ -25,7 +25,7 @@ const addLaunchs = (max = 1000) => {
     .catch((e) => {
       console.log("we do not have data", e);
 
-      document.body.append("fuck my life");
+      // document.body.append("fuck my life");
     });
 };
 if (document.title === "UPCOMING LAUNCHES") {
@@ -45,7 +45,7 @@ const addAgency = (agencyId, divId) => {
     })
     .catch((e) => {
       console.log("we do not have data", e);
-      document.body.append("fuck my life");
+      // document.body.append("fuck my life");
     });
 };
 
