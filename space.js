@@ -9,8 +9,8 @@ let lowestScrl = 0;
 const addLaunchs = (max = 1000) => {
   limit = max;
   fetch(
-    // `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
-    `https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
+    `https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
+    // `https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=${limit}&offset=${offset}`
   )
     .then((res) => {
       return res.json();
@@ -39,7 +39,9 @@ const addAgency = (agencyId, divId) => {
     })
     .catch((e) => {})
     .then((data) => {
-      shell = document.getElementById(`${divId.substring(1)}`);
+      console.log(`divId`, divId);
+      // shell = document.getElementById(`${divId.substring(1)}`);
+      shell = document.getElementById(divId);
       agencyContent = makeAgency(data, shell);
       console.log(shell);
     })
@@ -227,8 +229,10 @@ const makeItems = (launchName, parts, agencyId = null) => {
     } else if (part == "agency") {
       linki.addEventListener("click", (event) => {
         // console.log(event);
-        divId = event.toElement.hash;
-        addAgency(agencyId, divId);
+        // console.log(`launchName`, `${launchName}-agency`);
+        // divId = event.path[5];
+        // console.log(`divId.id`, divId.id);
+        addAgency(agencyId, `${launchName}-agency`);
       });
     }
 
@@ -409,6 +413,7 @@ const makeAgency = (agency, shell) => {
   shell.innerHTML = "";
   shell.append(picDiv);
   shell.append(infoDiv);
+  return shell;
 };
 
 const makeLocation = (location) => {
